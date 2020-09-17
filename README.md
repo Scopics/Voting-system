@@ -5,7 +5,7 @@
   ***This system represents a completely new level of electronic voting. With its help, it is easy to ensure fair conduct of elections, as well as to make coverage of people much more than offline voting.***
 
 ## **Useful links**
- * [Documentation]
+ * [Documentation](https://github.com/JSoftware-IP-93-group-2/Voting-system/blob/master/documentation/VotingSystem.md)
 
 ## **Autors**
 
