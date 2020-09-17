@@ -4,7 +4,8 @@
 
   ***This system represents a completely new level of electronic voting. With its help, it is easy to ensure fair conduct of elections, as well as to make coverage of people much more than offline voting.***
 
-## **Table of Contents**
+## **Useful links**
+ * [Documentation]
 
 ## **Autors**
 
