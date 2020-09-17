@@ -1,6 +1,6 @@
 # ***Voting system***
 
- ![Logo](https://github.com/MaksGovor/Images/blob/master/Voting-system/VotingLogo1.png)
+ ![Logo](https://github.com/MaksGovor/Images/blob/master/Voting-system/VoingLogo3.png)
 
   ***This system represents a completely new level of electronic voting. With its help, it is easy to ensure fair conduct of elections, as well as to make coverage of people much more than offline voting.***
 
