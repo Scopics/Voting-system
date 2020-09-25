@@ -4,7 +4,7 @@
 ## Список змін
 | Дата | Версія | Опис | Автори |
 | --- | --- | --- | --- |
-| 17.09.2020 | 1.0 | Створення документу | [Переглянути](https://github.com/JSoftware-IP-93-group-2/Voting-system#autors) |
+| 17.09.2020 | 1.0 | Створення документу | [Переглянути](https://github.com/Scopics/Voting-system#autors) |
 
 ## Зміст
 
