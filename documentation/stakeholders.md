@@ -12,6 +12,7 @@
 |25.09.2020|0.6.0|Функціональність програми|[Uryn Dmytro](https://github.com/tedi4t)|
 |27.09.2020|0.7.0|Пункт "Розробка структури документу та змісту" оновлено|[Maxim Govoruha](https://github.com/MaksGovor)|
 |27.09.2020|0.8.0|Пункт "Список змін" оновлено|[Maxim Govoruha](https://github.com/MaksGovor)|
+|27.09.2020|0.9.0|Пункт "Надійність" оновлено|[Anastasiya Trembach](https://github.com/Anastasia-Tre)|
 
 
 ## Зміст
