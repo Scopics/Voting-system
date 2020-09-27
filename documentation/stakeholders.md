@@ -8,10 +8,10 @@
 |22.09.2020|0.2.0|Характеристика ділових процесів|[Maxim Govoruha](https://github.com/MaksGovor)|
 |22.09.2020|0.3.0|Відмовостійкість, захищеність проекту|[Anastasiya Trembach](https://github.com/Anastasia-Tre)|
 |23.09.2020|0.4.0|Короткий огляд продукту|[Grybenko Yegor](https://github.com/YAGoOaR)|
-|21.09.2020|0.5.0|Доступність програми|[Vasil Sinishin](https://github.com/Volitair)|
-|21.09.2020|0.6.0|Функціональність програми|[Uryn Dmytro](https://github.com/tedi4t)|
-|21.09.2020|1.1.0|Пункт "Розробка структури документу та змісту" оновлено|[Maxim Govoruha](https://github.com/MaksGovor)|
-|21.09.2020|1.1.0|Пункт "Список змін" оновлено|[Maxim Govoruha](https://github.com/MaksGovor)|
+|24.09.2020|0.5.0|Доступність програми|[Vasil Sinishin](https://github.com/Volitair)|
+|25.09.2020|0.6.0|Функціональність програми|[Uryn Dmytro](https://github.com/tedi4t)|
+|27.09.2020|0.7.0|Пункт "Розробка структури документу та змісту" оновлено|[Maxim Govoruha](https://github.com/MaksGovor)|
+|27.09.2020|0.8.0|Пункт "Список змін" оновлено|[Maxim Govoruha](https://github.com/MaksGovor)|
 
 
 ## Зміст
