@@ -5,7 +5,7 @@
   ***This system represents a completely new level of electronic voting. With its help, it is easy to ensure fair conduct of elections, as well as to make coverage of people much more than offline voting.***
 
 ## **Useful links**
- * [Documentation](https://github.com/Scopics/Voting-system/tree/master/documentation/stakeholders.md)
+ * [Documentation](https://github.com/Scopics/Voting-system/tree/master/documentation)
 
 ## **Autors**
 
