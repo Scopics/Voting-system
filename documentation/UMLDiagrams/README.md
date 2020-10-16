@@ -5,4 +5,4 @@
 
 ## Модель прецедентів
 
-![](https://github.com/Scopics/Voting-system/tree/master/documentation/UMLDiagrams/src/VotingSystem.svg)
+![](https://github.com/Scopics/Voting-system/blob/master/documentation/UMLDiagrams/src/VotingSystem.svg)
