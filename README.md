@@ -1,7 +1,7 @@
-# ***Voting system***
+# ***[Voting System](https://maksgovor.github.io/CSS-HTML-Learning/)***
 
  ![Logo](https://github.com/MaksGovor/Images/blob/master/Voting-system/LabelVoting.png)
- <p style="text-align: center;">[Voting System](https://maksgovor.github.io/CSS-HTML-Learning/)</p>
+ 
   ***This system represents a completely new level of electronic voting. With its help, it is easy to ensure fair conduct of elections, as well as to make coverage of people much more than offline voting.***
 
 ## **Useful links**
