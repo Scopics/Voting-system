@@ -16,7 +16,8 @@
     "PostgreSQL",
     "nodejs",
     "typescript",
-    "javascript"
+    "javascript",
+    "express-app"
   ],
   "author": "Scopisc Members",
   "license": "MIT",
