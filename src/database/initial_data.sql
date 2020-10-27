@@ -110,6 +110,6 @@ INSERT INTO users VALUES
     (32, 'Людмила', 'Ткаченко', '05-01-1986', 'female', 24, 'nofijugo-0738@gmail.com', 'ADYZ8jHA0D6eBNwk76Ud', -1),
     (33, 'Марк', 'Москаленко', '05-10-1967', 'male', 18, 'qattyvyttubu-8651@gmail.com', 'heeqi24W4KBd42JYPe7N', -1),
     (34, 'Михайло', 'Вихорь', '07-04-1978', 'male', 22, 'feppehassyss-6048@gmail.com', 'By0wujvLPCgMhpuQchtb', -1),
-    (35, 'Марина', 'Оніпко', '11-06-1992', 'female', 3, 'fokyllehis-6613@gmail.com', 'XJt9vC20B8hoexqNzX0o', -1),
+    (35, 'Марина', 'Оніпко', '11-06-1992', 'female', 3, 'fokyllehis-6613@gmail.com', 'XJt9vC20B8hoexqNzX0o', -1);
 
 
