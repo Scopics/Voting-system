@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS Public.Votings (
   voting_id serial NOT NULL,
   name varchar NOT NULL,
   description text NOT NULL,
-  start_date date NOT NULL,
-  end_date date NOT NULL,
+  start_date timestamp NOT NULL,
+  end_date timestamp NOT NULL,
   PRIMARY KEY (voting_id)
 );
 
@@ -56,8 +56,8 @@ CREATE TABLE IF NOT EXISTS Public.Petitions (
   name varchar NOT NULL,
   description text NOT NULL,
   author_user_id int NOT NULL,
-  start_date date NOT NULL,
-  end_date date NOT NULL,
+  start_date timestamp NOT NULL,
+  end_date timestamp NOT NULL,
   PRIMARY KEY (petition_id)
 );
 
