@@ -12,6 +12,11 @@ CREATE TABLE IF NOT EXISTS Public.Districts (
   CONSTRAINT Districts_region_id_foreign FOREIGN KEY (region_id) REFERENCES Public.Regions (region_id)
 );
 
+-- Explanations for field status: 
+-- -1 - simple voter 
+--  0 - regional commissioner
+--  1 - central commissioner
+
 CREATE TABLE IF NOT EXISTS Public.Users (
   user_id serial NOT NULL,
   name varchar NOT NULL,
