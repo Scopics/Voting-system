@@ -112,4 +112,48 @@ INSERT INTO users VALUES
     (34, 'Михайло', 'Вихорь', '07-04-1978', 'male', 22, 'feppehassyss-6048@gmail.com', 'By0wujvLPCgMhpuQchtb', -1),
     (35, 'Марина', 'Оніпко', '11-06-1992', 'female', 3, 'fokyllehis-6613@gmail.com', 'XJt9vC20B8hoexqNzX0o', -1);
 
+-- Adding petitions
+
+-- fields: petition_id, name, description, author_user_id, start_date, end_date
+
+-- Explanations for fields start_date: 
+-- The date petition was posted
+
+-- Explanations for fields end_date: 
+-- The date voting for petition ends
+
+INSERT INTO petitions VALUES
+	(0, 'Creating bicycle paths in city Irpin', 'We need to ride bicycles somewhere! The automobile roads are really dangerous, so its necessary to build bicycle roads.', 4, '2020-05-28 11:23', '2020-06-29 00:00'),
+	(1, 'We want free icecream!', 'Adopt a law that everyone get access to free icecream!',22, '2020-10-19 21:20', '2020-11-20 00:00'),
+	(2, 'Adopt nuclear weapons', 'Alahuakbar!', 11, '2020-01-16 22:58', '2020-02-17 00:00'),
+	(3, 'Restrict killing animals for food', 'Pls do not do that because they are so cuuute!((', 34, '2020-03-12 18:01', '2020-04-13 00:00'),
+	(4, 'Plant more trees', 'The environment and air are really dirty here. I need to breathe something.', 5, '2020-07-05 17:11', '2020-08-06 00:00'),
+	(5, 'Test123', 'i just wanna check if this works',19, '2018-06-10 12:00', '20118-07-11 00:00'),
+	(6, 'Make the JavaScript second Ukrainian national language', 'I want to speak JavaScript!',1, '2020-03-12 15:14', '2020-04-13 00:00'),
+	(7, 'Restrict dying', 'If Dying will be illegal, people will not die! AUF', 6, '2020-02-01 08:16', '2020-03-02 00:00'),
+	(8, 'Make mass media telling every homeless people to buy house', 'If you are homeless, then just buy a house! Think about it.', 27, '2020-05-25 14:42', '2020-06-26 00:00'),
+	(9, 'caApTurEe th e Mun', 'buil d A bIg spaaSe ship an Go an d cap the mun. wy no?', 35, '2020-07-20 19:22', '2020-08-21 00:00'),
+	(10, 'Print a loooot of  money', 'Just print money and give it to everyone so everyone will be rich! Its easy! PROFIT', 32, '2020-09-29 13:46', '2020-10-30 00:00');
+
+-- Adding petition_results
+
+-- fields: petition_id, user_id
+
+INSERT INTO petition_results VALUES
+	(0, 10),
+	(2, 7),
+	(6, 3),
+	(1, 32),
+	(0, 24),
+	(4, 12),
+	(4, 17),
+	(2, 9),
+	(6, 4),
+	(0, 30),
+	(7, 3);
+
+
+	
+
+
 
