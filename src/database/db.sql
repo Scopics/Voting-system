@@ -1,11 +1,11 @@
 CREATE TABLE IF NOT EXISTS Public.Regions (
-  region_id serial NOT NULL,
+  region_id int NOT NULL,
   name varchar NOT NULL,
   PRIMARY KEY (region_id)
 );
 
 CREATE TABLE IF NOT EXISTS Public.Districts (
-  district_id serial NOT NULL,
+  district_id int NOT NULL,
   name varchar NOT NULL,
   region_id int NOT NULL,
   PRIMARY KEY (district_id),
