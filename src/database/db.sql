@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS Public.Districts (
   CONSTRAINT Districts_region_id_foreign FOREIGN KEY (region_id) REFERENCES Public.Regions (region_id)
 );
 
--- Explanations for field status: 
--- -1 - simple voter 
+-- Explanations for field status:
+-- -1 - simple voter
 --  0 - regional commissioner
 --  1 - central commissioner
 
@@ -50,7 +50,9 @@ CREATE TABLE IF NOT EXISTS Public.Variants (
 );
 
 CREATE TABLE IF NOT EXISTS Public.Voting_results (
+  voting_id int NOT NULL,
   variant_id int NOT NULL,
+  UNIQUE(voting_id, user_id),
   user_id int NOT NULL,
   CONSTRAINT Voting_results_user_id_foreign FOREIGN KEY (user_id) REFERENCES Public.Users (user_id),
   CONSTRAINT Voting_results_variant_id_foreign FOREIGN KEY (variant_id) REFERENCES Public.Variants (variant_id)
@@ -69,6 +71,7 @@ CREATE TABLE IF NOT EXISTS Public.Petitions (
 CREATE TABLE IF NOT EXISTS Public.Petition_results (
   petition_id int NOT NULL,
   user_id int NOT NULL,
+  UNIQUE(petition_id, user_id),
   CONSTRAINT Petition_results_petition_id_foreign FOREIGN KEY (petition_id) REFERENCES Public.Petitions (petition_id),
   CONSTRAINT Petition_results_user_id_foreign FOREIGN KEY (user_id) REFERENCES Public.Users (user_id)
 );
