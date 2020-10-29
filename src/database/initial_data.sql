@@ -283,6 +283,10 @@ INSERT INTO voting_results VALUES
 	(3, 9, 5),
 	(3, 8, 26);
 
+-- Adding falsifications
+
+-- fields: falsification_id, author_user_id, voting_id
+
 INSERT INTO falsifications VALUES 
 (default, 0, 0, ' Falsification in city Brovary', 'he used fake account. He voted one time'),
 (default, 4, 0, ' Falsification in city Kyiv', 'he voted for someone who even doesnt know to read. He voted one time'),
