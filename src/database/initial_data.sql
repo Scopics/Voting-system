@@ -290,6 +290,6 @@ INSERT INTO voting_results VALUES
 INSERT INTO falsifications VALUES 
 (default, 0, 0, ' Falsification in city Brovary', 'he used fake account. He voted one time'),
 (default, 4, 0, ' Falsification in city Kyiv', 'he voted for someone who even doesnt know to read. He voted one time'),
-(default, 12 ,1 ' Falsification in city Odessa', 'the person under 18 years old voted. He voted one time'),
-(default, 16 , 1 ' Falsification in city Dnipro', 'he early voted. He voted one time'),
+(default, 12, 1, ' Falsification in city Odessa', 'the person under 18 years old voted. He voted one time'),
+(default, 16, 1, ' Falsification in city Dnipro', 'he early voted. He voted one time'),
 (default, 18, 2, ' Falsification in city Irpin', 'I saw a man who was cheating. He voted few times')
