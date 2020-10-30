@@ -292,4 +292,10 @@ INSERT INTO falsifications VALUES
 (default, 5, 1, ' Falsification in city Kyiv', 'he voted for someone who even doesnt know to read. He voted one time'),
 (default, 13, 2, ' Falsification in city Odessa', 'the person under 18 years old voted. He voted one time'),
 (default, 17, 2, ' Falsification in city Dnipro', 'he early voted. He voted one time'),
-(default, 19, 3, ' Falsification in city Irpin', 'I saw a man who was cheating. He voted few times')
+(default, 19, 3, ' Falsification in city Irpin', 'I saw a man who was cheating. He voted few times'),
+(default, 21, 3, ' Мертві душі', 'У списки виборців вносяться дані про померлих, або придуманих людей'),
+(default, 24, 4, ' Купівля голосів', 'Видача грошової, або якоїсь іншої винагороди за голосування за певного кандидата'),
+(default, 25, 4, ' Недійсні бюлетені', 'Бюлетені можуть бути без підпису члена комісії, додаткові позначки проти всіх або за кількох кандидатів'),
+(default, 28, 5, ' Невидимі чорнила', 'Використання ручок, олівців, помітки від яких можуть бути виведеними, або зникають самостійно з часом'),
+(default, 30, 5, ' Псування бюлетенів', 'Псування бюлетенів «чужого» кандидата на етапі підрахунку голосів, з метою визнання їх недійсними'),
+(default, 31, 5, ' Фальсифікація під час голосування вдома', 'Допомога в заповненні за потрібного кандидата, псування бюлетеня за чужого');
