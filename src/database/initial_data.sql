@@ -355,7 +355,7 @@ INSERT INTO voting_results VALUES
 
 -- Adding falsifications
 
--- fields: falsification_id, author_user_id, voting_id
+-- fields: falsification_id, author_user_id, voting_id, title, description
 
 INSERT INTO falsifications VALUES 
 (default, 1, 1, ' Falsification in city Brovary', 'he used fake account. He voted one time'),
