@@ -4,7 +4,7 @@
   "description": "Voting system",
   "main": "index.js",
   "scripts": {
-    "test": "node ./src/index.js"
+    "start": "node ./src/index.js"
   },
   "repository": {
     "type": "git",
