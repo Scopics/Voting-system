@@ -1,11 +1,16 @@
 'use strict';
 
 const { Pool } = require('pg');
-const express = require("express");
+const express = require('express');
+const helmet = require('helmet');
+
+const pool = new Pool();
 
 const app = express();
 
-const pool = new Pool();
+app.use(express.urlencoded())
+app.use(express.json());
+app.use(helmet());
 
 app.listen(3000, () => {
  console.log("Server running on port 3000");
