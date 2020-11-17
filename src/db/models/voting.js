@@ -6,7 +6,27 @@ const pool = require('../db');
 class Voting {
 
 
+  async getInfo(voting_id) {
+    try {
+      const votings = await pool.query(
+        `SELECT * FROM votings WHERE voting_id  = ${voting_id};`
+      );
+      return votings.rows;
+    } catch (error) {
+      return error.detail;
+    }
+  }
 
+  async getVariants(voting_id) {
+    try {
+      const variants = await pool.query(
+        `SELECT * FROM variants WHERE voting_id = ${voting_id};`
+      );
+      return variants.rows;
+    } catch (error) {
+      return error.detail;
+    }
+  }
 
   async getAll() {
     try {
