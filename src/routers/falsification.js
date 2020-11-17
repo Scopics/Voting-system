@@ -17,6 +17,14 @@ router.get('/:idFalsification', async (req, res) => {
   }
 });
 
-
+// get all falsifications
+router.get('/all', async (req, res) => {
+  try {
+    const result = await Falsification.getAll();
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 module.exports = router;

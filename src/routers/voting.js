@@ -4,6 +4,28 @@ const Voting = require('../db/models/voting');
 const express = require('express');
 const router = express.Router();
 
+// get specific voting
+router.get('/:idVoting', async (req, res) => {
+  try {
+    const idVoting = req.params.idVoting;
+    const result = await Voting.getInfo(idVoting);
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// get variants for specific voting
+router.get('/:idVoting/variants', async (req, res) => {
+  try {
+    const idVoting = req.params.idVoting;
+    const result = await Voting.getVariants(idVoting);
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // get all votings
 router.get('/all', async (req, res) => {
   try {
@@ -13,7 +35,6 @@ router.get('/all', async (req, res) => {
     console.log(error);
   }
 });
-
 
 
 // get result
