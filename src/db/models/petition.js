@@ -1,0 +1,59 @@
+'use strict';
+
+const pool = require('../db');
+
+class Petition {
+
+
+  async create(name, description, author_user_id, start_date, end_date) {
+    try {
+      await pool.query(
+        `INSERT INTO petitions VALUES (default, ${name}, ${description}, 
+            ${author_user_id}, ${start_date}, ${end_date});`
+      );
+      return { msg: 'OK' };
+    } catch (error) {
+      return error.detail;
+    }
+  }
+
+  async result(petition_id) {
+    try {
+      const result = await pool.query(
+        `SELECT petitions.name, count(petitions.petition_id) AS votes
+          FROM petitions
+          INNER JOIN petition_results
+              ON petitions.petition_id = petition_results.petition_id
+          WHERE petitions.petition_id = ${petition_id}
+          GROUP BY petitions.name
+          ORDER BY votes DESC;`
+      );
+      return result.rows;
+    } catch (error) {
+      return error.detail;
+    }
+  }
+
+  async resultDistrict(petition_id, district_id) {
+    try {
+      const result = await pool.query(
+        `SELECT d.name, count(u.name) AS votes
+        FROM users u
+        INNER JOIN petition_results pr
+            ON pr.user_id = u.user_id
+        INNER JOIN petitions p
+            ON p.petition_id = pr.petition_id
+        INNER JOIN districts d
+            ON u.district_id = d.district_id
+        WHERE p.petition_id = ${petition_id} AND d.district_id = ${district_id}
+        GROUP BY d.name
+        ORDER BY votes DESC;`
+      );
+      return result.rows;
+    } catch (error) {
+      return error.detail;
+    }
+  }
+}
+
+module.exports = new Petition();

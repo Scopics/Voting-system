@@ -15,10 +15,18 @@ class Falsification {
     } catch (error) {
       return error.detail;
     }
-
   }
 
-
+  async getAll() {
+    try {
+      const falsifications = await pool.query(
+        'SELECT * FROM falsifications'
+      );
+      return falsifications.rows[0];
+    } catch (error) {
+      return error.detail;
+    }
+  }
 
 }
 
