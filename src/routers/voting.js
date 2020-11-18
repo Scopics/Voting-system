@@ -4,6 +4,25 @@ const Voting = require('../db/models/voting');
 const express = require('express');
 const router = express.Router();
 
+//create voting
+router.get('/create', async (req, res) => {
+  try {
+    const { name, description,
+      start_date, end_date } = req.query;
+    const votingData = { 
+      name: 'new Election', 
+      description: 'new test election',
+      start_date: '2020-11-18T9:00:00.000Z', 
+      end_date: '2020-11-18T20:00:00.000Z'
+    };
+    //зробив гамнокод, тому що потім будемо передавати об'єкт
+    const result = await Voting.create(votingData);
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+})
+
 // get specific voting
 router.get('/:idVoting', async (req, res) => {
   try {

@@ -1,5 +1,5 @@
-var fs = require("fs");
-var contents = fs.readFileSync("./resources/queries.json");
-var queries = JSON.parse(contents);
+const fs = require("fs");
+const fileContent = fs.readFileSync('src/resources/queries.json');
+const queries = JSON.parse(fileContent);
 
-module.exports = {queries};
+module.exports = { queries };
