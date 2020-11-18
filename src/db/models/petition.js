@@ -8,7 +8,7 @@ class Petition {
   async getAll() {
     try {
       const petitions = await pool.query(
-        'SELECT * FROM petitions ORDER BY start_date DESC;'
+        "SELECT * FROM petitions ORDER BY start_date DESC;"
       );
       return petitions.rows;
     } catch (error) {

@@ -14,8 +14,8 @@ app.use(helmet());
 const votingRouter = require('./routers/voting.js');
 app.use('/voting', votingRouter);
 
-const userRouteer = require('./routers/user.js');
-app.use('/user', userRouteer);
+const userRouter = require('./routers/user.js');
+app.use('/user', userRouter);
 
 const petitionRouter = require('./routers/petition.js');
 app.use('/petition', petitionRouter);
