@@ -1,6 +1,7 @@
 {   "Falsification.create" : "INSERT INTO falsifications VALUES (default, 1$, 2$, 3$, 4$);", 
     "Falsification.getInfo" : "SELECT * FROM falsifications WHERE falsification_id = $1;",
     "Falsification.getAll" : "SELECT * FROM falsifications;",
+    "Petitions.getInfo" : "SELECT * FROM petitions WHERE petition_id  = $1;",
     "Petitions.getAll" : "SELECT * FROM petitions ORDER BY start_date DESC;",
     "Petitions.create" : "INSERT INTO petitions VALUES (default, $1, $2, $3, $4, $5;",
     "Petitions.result" : "SELECT petitions.name, count(petitions.petition_id) AS votes FROM petitions INNER JOIN petition_results ON petitions.petition_id = petition_results.petition_id WHERE petitions.petition_id = $1 GROUP BY petitions.name ORDER BY votes DESC;",

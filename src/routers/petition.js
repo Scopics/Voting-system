@@ -2,6 +2,7 @@
 
 const Petition = require('../db/models/petition');
 const express = require('express');
+const { response } = require('express');
 const router = express.Router();
 
 
@@ -15,6 +16,18 @@ router.post('/create', async (req, res) => {
     console.log(error);
   }
 });
+
+//get info for petition
+router.get('/:idPetition', async (req, res) => {
+  const idPetition = req.params.idPetition;
+  try {
+    const result = await Petition.getInfo(idPetition);
+    res.json(result);
+  } catch(e) {
+    res.status(500);
+    res.json(e);
+  }
+})
 
 // get result
 router.get('/:idPetition/resultGeneral', async (req, res) => {

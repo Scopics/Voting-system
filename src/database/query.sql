@@ -144,4 +144,4 @@ UPDATE users SET status = ${status} WHERE user_id = ${user_id};
 
 --19. Вывод вариантов для определенного голосования
 
-SELECT * FROM variants WHERE voting_id = ${voting_id}; -- Діма
+SELECT * FROM variants WHERE voting_id = ${voting_id};
