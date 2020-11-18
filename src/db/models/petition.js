@@ -5,6 +5,17 @@ const pool = require('../db');
 class Petition {
 
 
+  async getAll() {
+    try {
+      const petitions = await pool.query(
+        'SELECT * FROM petitions ORDER BY start_date DESC;'
+      );
+      return petitions.rows;
+    } catch (error) {
+      return error.detail;
+    }
+  }
+
   async create(name, description, author_user_id, start_date, end_date) {
     try {
       await pool.query(
@@ -54,6 +65,8 @@ class Petition {
       return error.detail;
     }
   }
+
+  
 }
 
 module.exports = new Petition();

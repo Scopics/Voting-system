@@ -39,6 +39,16 @@ class Voting {
     }
   }
 
+  async getCurrent(){
+    try {
+      const votings = await pool.query(
+        'SELECT * FROM votings WHERE (start_date < NOW() AND NOW() < end_date);'
+      );
+      return votings.rows;
+    } catch (error) {
+      return error.detail;
+    }
+  }
 
   async result(voting_id) {
     try {
@@ -75,7 +85,6 @@ class Voting {
       return error.detail;
     }
   }
-
 
 
 }

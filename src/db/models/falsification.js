@@ -5,6 +5,16 @@ const pool = require('../db.js');
 class Falsification {
 
 
+  async create(author_user_id, voting_id, title, description) {
+    try {
+      await pool.query(
+        `INSERT INTO falsifications VALUES (default, ${author_user_id}, ${voting_id}, ${title}, ${description});`
+      );
+      return { msg: 'OK' };
+    } catch (error) {
+      return error.detail;
+    }
+  }
 
   async getInfo(falsification_id) {
     try {
@@ -27,6 +37,7 @@ class Falsification {
       return error.detail;
     }
   }
+
 
 }
 
