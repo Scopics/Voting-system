@@ -8,7 +8,7 @@ class Falsification {
   async create(author_user_id, voting_id, title, description) {
     try {
       await pool.query(
-        `INSERT INTO falsifications VALUES (default, ${author_user_id}, ${voting_id}, ${title}, ${description});`
+        "INSERT INTO falsifications VALUES (default, 1$, 2$, 3$, 4$);", [author_user_id, voting_id, title, description]
       );
       return { msg: 'OK' };
     } catch (error) {
@@ -19,7 +19,7 @@ class Falsification {
   async getInfo(falsification_id) {
     try {
       const falsifications = await pool.query(
-        `SELECT * FROM falsifications WHERE falsification_id = ${falsification_id};`
+        "SELECT * FROM falsifications WHERE falsification_id = $1;", [falsification_id]
       );
       return falsifications.rows[0];
     } catch (error) {
@@ -30,7 +30,7 @@ class Falsification {
   async getAll() {
     try {
       const falsifications = await pool.query(
-        'SELECT * FROM falsifications'
+        "SELECT * FROM falsifications"
       );
       return falsifications.rows[0];
     } catch (error) {
