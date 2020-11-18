@@ -7,6 +7,7 @@
     "Petitions.resultDistrict" : "SELECT d.name, count(u.name) AS votes FROM users u INNER JOIN petition_results pr ON pr.user_id = u.user_id INNER JOIN petitions p ON p.petition_id = pr.petition_id INNER JOIN districts d ON u.district_id = d.district_id WHERE p.petition_id = $1 AND d.district_id = $2 GROUP BY d.name ORDER BY votes DESC;",
     "User.register" : "INSERT INTO users VALUES (default, $1, $2, $3, $4, $5, $6, $7, $8);",
     "User.login" : "SELECT * FROM users WHERE users.email = $1 AND users.password = $2;",
+    "Voting.create": "INSERT INTO votings VALUES (default, $1, $2, $3, $4);",
     "Voting.getInfo" : "SELECT * FROM votings WHERE voting_id  = $1;",
     "Voting.getVariants" : "SELECT * FROM variants WHERE voting_id = $1",
     "Voting.getAll" : "SELECT * FROM votings ORDER BY start_date DESC;",
