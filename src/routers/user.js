@@ -17,5 +17,14 @@ router.post('/register', async (req, res) => {
   }
 });
 
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const result = User.login(email, password);
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 module.exports = router;

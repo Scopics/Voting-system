@@ -27,6 +27,15 @@ router.get('/:idPetition/resultGeneral', async (req, res) => {
   }
 });
 
+// get all
+router.get('/all', async (req, res) => {
+  try {
+    const result = await Petition.getAll();
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 router.get('/:idPetition/resultDistrict', async (req, res) => {
   try {

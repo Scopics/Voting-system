@@ -36,6 +36,15 @@ router.get('/all', async (req, res) => {
   }
 });
 
+// get current votings
+router.get('/current', async (req, res) => {
+  try {
+    const result = await Voting.getCurrent();
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // get result
 router.get('/:idVoting/resultGeneral', async (req, res) => {
