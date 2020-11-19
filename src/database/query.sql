@@ -25,7 +25,9 @@ SELECT * FROM petitions WHERE (DATE(end_date) >= CURRENT_DATE) AND (DATE(start_d
 INSERT INTO petitions VALUES (default, ${name}, ${description}, ${author_user_id}, ${start_date}, ${end_date});
 
 
+--7. Запрос на добавление вариантов для голосования
 
+INSERT INTO variants VALUES (default, ${voting_id}, ${name}, ${description});
 
 --8. Запрос на добавление нового юзера
 
@@ -47,7 +49,11 @@ SELECT variants.name, count(users.name) AS votes
     GROUP BY variants.name
     ORDER BY votes DESC;
 
-
+SELECT variant_id, COUNT(variant_id) AS num_voters
+    FROM voting_results
+    WHERE voting_id = ${voting_id}
+    GROUP BY variant_id
+    ORDER BY num_voters DESC;
 
 
 
@@ -108,7 +114,13 @@ SELECT vr.variant_id, COUNT(variant_id) AS num_voters
 --14. Запрос для подсчёта голосов за определенную петицию по областям в порядке убывания
 
 
-
+SELECT petition_id, u.district_id, COUNT(pr.petition_id) AS num_voters
+    FROM petition_results pr
+    LEFT JOIN users u
+        ON u.user_id=pr.user_id
+    WHERE pr.petition_id = ${petition_id}
+    GROUP BY pr.petition_id, u.district_id
+    ORDER BY num_voters DESC;
 
 SELECT districts.name, count(users.name) AS votes 
     FROM users
@@ -159,3 +171,7 @@ UPDATE users SET status = ${status} WHERE user_id = ${user_id};
 --19. Вывод вариантов для определенного голосования
 
 SELECT * FROM variants WHERE voting_id = ${voting_id};
+
+--20. Запрос для записи выбора в петиции
+
+INSERT INTO petition_results VALUES (${petition_id}, ${user_id});
