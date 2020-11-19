@@ -1,21 +1,26 @@
 'use strict';
 
+const { response } = require('express');
 const pool = require('../db');
 const { queries } = require('../resources');
 
 class Petition {
 
-  async getInfo(id_petition) {
-    const queryData = [id_petition];
-    const getPetitionInfoQuery = queries['Petitions.getInfo'];
-    try {
-      const petitionInfo = await pool.query(
-        getPetitionInfoQuery, queryData
-      );
-      return petitionInfo.rows;
-    } catch (error) {
-      return error.detail;
-    }
+  async getInfo(params) {
+    // const queryData = [id_petition];
+    // const getPetitionInfoQuery = queries['Petitions.getInfo'];
+    // try {
+    //   const petitionInfo = await pool.query(
+    //     getPetitionInfoQuery, queryData
+    //   );
+    //   return petitionInfo.rows;
+    // } catch (error) {
+    //   return error.detail;
+    // }
+    const { queryParams, query } = params;
+    const queryData = Object.values(queryParams);
+    const petitions = await pool.query(query, queryData);
+    return petitions.rows;
   }
 
   async getAll() {

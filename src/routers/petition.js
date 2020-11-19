@@ -3,8 +3,24 @@
 const Petition = require('../db/models/petition');
 const express = require('express');
 const { response } = require('express');
+const { queries } = require('../db/resources');
 const router = express.Router();
 
+async function makeRequest(reqData) {
+  const {req, res, modelFunc, query} = reqData;
+  const reqParams = req.params;
+  const reqQuery = req.query;
+  const modelParams = {
+    queryParams: {...reqQuery, ...reqParams},
+    query
+  };
+  try {
+    const result = await modelFunc(modelParams);
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // create
 router.post('/create', async (req, res) => {
@@ -19,14 +35,21 @@ router.post('/create', async (req, res) => {
 
 //get info for petition
 router.get('/:idPetition', async (req, res) => {
-  const idPetition = req.params.idPetition;
-  try {
-    const result = await Petition.getInfo(idPetition);
-    res.json(result);
-  } catch(e) {
-    res.status(500);
-    res.json(e);
+  const reqData = {
+    req, res,
+    modelFunc: Petition.getInfo,
+    query: queries['Petitions.getInfo']
   }
+  await makeRequest(reqData);
+  // const idPetition = req.params.idPetition;
+  // try {
+  //   const result = await Petition.getInfo(idPetition);
+  //   res.json(result);
+  // } catch(e) {
+  //   res.status(500);
+  //   res.json(e);
+  // }
+
 })
 
 // get result
