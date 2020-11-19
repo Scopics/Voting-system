@@ -1,9 +1,16 @@
+--1. Вывод всех голосований в порядке убывания
+
+SELECT * FROM votings ORDER BY start_date DESC;
 
 --2. Вывод только тех голосований которые идут сейчас
 
 -- Только по дате
 
 SELECT * FROM votings WHERE (DATE(end_date) >= CURRENT_DATE) AND (DATE(start_date) <= CURRENT_DATE);
+
+--3. Вывод всех петиций в порядке убывания
+
+SELECT * FROM petitions ORDER BY start_date DESC;
 
 --4. Вывод тех петиций которые идут сейчас
 
@@ -43,7 +50,10 @@ SELECT variants.name, count(users.name) AS votes
 
 
 
+
 --11. Запрос для подсчёта голосов за определенную петицию
+
+SELECT petition_id, COUNT(petition_id) AS num_voters FROM petition_results WHERE petition_id = ${petition_id} GROUP BY petition_id;
 
 
 
@@ -137,7 +147,11 @@ SELECT regions.name, count(users.name) AS votes
 
 SELECT * FROM users
     WHERE users.email = ${user_id} AND users.password = ${password}; 
+                                   
+--17. Запрос для записи выбора в голосовании
 
+INSERT INTO voting_results VALUES (${voting_id}, ${variant_id}, ${user_id});
+                                   
 --18. Запрос на изменение статуса юзера
 
 UPDATE users SET status = ${status} WHERE user_id = ${user_id}; 
