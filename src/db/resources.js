@@ -31,3 +31,5 @@ async function makeQuery(queryData) {
     return petitions.rows;
   }
 }
+
+module.exports = { makeRequest, makeQuery };
