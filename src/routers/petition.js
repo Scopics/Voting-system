@@ -35,11 +35,28 @@ router.get('/all', async (req, res) => {
   }
 });
 
+//vote for petition
+router.get('/:idPetition/vote', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['Petition_results.addVote']
+  }
+  await makeRequest(reqData);
+});
+
 // get result
 router.get('/:idPetition/resultGeneral', async (req, res) => {
   const reqData = {
     req, res,
     query: queries['Petitions.result']
+  }
+  await makeRequest(reqData);
+});
+
+router.get('/:idPetition/resultRegion', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['Petitions.resultRegion']
   }
   await makeRequest(reqData);
 });
