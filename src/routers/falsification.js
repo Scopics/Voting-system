@@ -4,6 +4,7 @@ const Falsification = require('../db/models/falsification');
 const express = require('express');
 const { makeRequest } = require('../db/resources');
 const queries = require('../resources/queries.json');
+const order = require('../resources/order.json');
 const router = express.Router();
 
 
@@ -32,7 +33,8 @@ router.get('/:idFalsification', async (req, res) => {
 router.get('/all', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['Falsification.getAll']
+    query: queries['Falsification.getAll'],
+    queryParamsOrder: order['Falsification.getAll'],
   };
   await makeRequest(reqData);
 });
