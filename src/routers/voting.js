@@ -4,6 +4,7 @@ const Voting = require('../db/models/voting');
 const express = require('express');
 const { makeRequest } = require('../db/resources');
 const queries = require('../resources/queries.json');
+const order = require('../resources/order.json');
 const router = express.Router();
 
 //create voting
@@ -19,20 +20,20 @@ router.post('/create', async (req, res) => {
 router.get('/:idVoting', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['Voting.getAll']
+    query: queries['Voting.getInfo'],
+    queryParamsOrder: order['Voting.getInfo'],
   };
   await makeRequest(reqData);
 });
 
 // get variants for specific voting
 router.get('/:idVoting/variants', async (req, res) => {
-  try {
-    const idVoting = req.params.idVoting;
-    const result = await Voting.getVariants(idVoting);
-    res.json(result);
-  } catch (error) {
-    console.log(error);
-  }
+  const reqData = {
+    req, res,
+    query: queries['Voting.getVariants'],
+    queryParamsOrder: order['Voting.getVariants'],
+  };
+  await makeRequest(reqData);
 });
 
 // get all votings
