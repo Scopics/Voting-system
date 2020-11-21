@@ -1,8 +1,7 @@
 const fs = require("fs");
+const pool = require('../db/db');
 const fileContent = fs.readFileSync('src/resources/queries.json');
 const queries = JSON.parse(fileContent);
-
-module.exports = { queries };
 
 async function makeRequest(reqData) {
   const {req, res, query} = reqData;
@@ -22,14 +21,14 @@ async function makeRequest(reqData) {
 
 async function makeQuery(queryData) {
   const { queryParams, query } = queryData;
-  const queryData = Object.values(queryParams);
+  const queryParamsArr = Object.values(queryParams);
   try {
-    const petitions = await pool.query(query, queryData);
+    const petitions = await pool.query(query, queryParamsArr);
     return petitions.rows;
   } catch(error) {
-    const petitions = await pool.query(query, queryData);
+    const petitions = await pool.query(query, queryParamsArr);
     return petitions.rows;
   }
 }
 
-module.exports = { makeRequest, makeQuery };
+module.exports = { queries, makeRequest, makeQuery };
