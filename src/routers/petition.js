@@ -3,7 +3,8 @@
 const Petition = require('../db/models/petition');
 const express = require('express');
 const { response } = require('express');
-const { queries } = require('../db/resources');
+const { makeRequest } = require('../db/resources');
+const queries = require('../resources/queries.json');
 const router = express.Router();
 
 // create
@@ -19,14 +20,11 @@ router.post('/create', async (req, res) => {
 
 //get info for petition
 router.get('/:idPetition', async (req, res) => {
-  const idPetition = req.params.idPetition;
-  try {
-    const result = await Petition.getInfo(idPetition);
-    res.json(result);
-  } catch(e) {
-    res.status(500);
-    res.json(e);
+  const reqData = {
+    req, res,
+    query: queries['Petitions.getInfo']
   }
+  await makeRequest(reqData);
 })
 
 // get result

@@ -16,16 +16,6 @@ class Falsification {
     }
   }
 
-  async getInfo(falsification_id) {
-    try {
-      const falsifications = await pool.query(
-        "SELECT * FROM falsifications WHERE falsification_id = $1;", [falsification_id]
-      );
-      return falsifications.rows[0];
-    } catch (error) {
-      return error.detail;
-    }
-  }
 
   async getAll() {
     try {

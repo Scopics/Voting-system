@@ -6,19 +6,6 @@ const { queries } = require('../resources');
 
 class Petition {
 
-  async getInfo(params) {
-    const queryData = [id_petition];
-    const getPetitionInfoQuery = queries['Petitions.getInfo'];
-    try {
-      const petitionInfo = await pool.query(
-        getPetitionInfoQuery, queryData
-      );
-      return petitionInfo.rows;
-    } catch (error) {
-      return error.detail;
-    }
-  }
-
   async getAll() {
     try {
       const petitions = await pool.query(

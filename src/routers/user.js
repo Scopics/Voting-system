@@ -2,19 +2,19 @@
 
 const User = require('../db/models/user');
 const express = require('express');
+const { makeRequest } = require('../db/resources');
+const queries = require('../resources/queries.json');
 const router = express.Router();
 
 
 
 // register
 router.post('/register', async (req, res) => {
-  try {
-    const { name, surname, birthday_date, gender, district_id, email, password, status } = req.body;
-    const result = User.register(name, surname, birthday_date, gender, district_id, email, password, status);
-    res.json(result);
-  } catch (error) {
-    console.log(error);
-  }
+  const reqData = {
+    req, res,
+    query: queries['User.login']
+  };
+  await makeRequest(reqData);
 });
 
 router.post('/login', async (req, res) => {
