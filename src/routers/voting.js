@@ -27,13 +27,11 @@ router.get('/create', async (req, res) => {
 
 // get specific voting
 router.get('/:idVoting', async (req, res) => {
-  try {
-    const idVoting = req.params.idVoting;
-    const result = await Voting.getInfo(idVoting);
-    res.json(result);
-  } catch (error) {
-    console.log(error);
-  }
+  const reqData = {
+    req, res,
+    query: queries['Voting.getAll']
+  };
+  await makeRequest(reqData);
 });
 
 // get variants for specific voting

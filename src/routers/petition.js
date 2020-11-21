@@ -9,13 +9,11 @@ const router = express.Router();
 
 // create
 router.post('/create', async (req, res) => {
-  try {
-    const { name, description, author_user_id, start_date, end_date } = req.body;
-    const result = Petition.create(name, description, author_user_id, start_date, end_date);
-    res.json(result);
-  } catch (error) {
-    console.log(error);
+  const reqData = {
+    req, res,
+    query: queries['Petitions.create']
   }
+  await makeRequest(reqData);
 });
 
 //get info for petition
@@ -27,17 +25,6 @@ router.get('/:idPetition', async (req, res) => {
   await makeRequest(reqData);
 })
 
-// get result
-router.get('/:idPetition/resultGeneral', async (req, res) => {
-  try {
-    const idPetition = req.params.idPetition;
-    const result = await Petition.result(idPetition);
-    res.json(result);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 // get all
 router.get('/all', async (req, res) => {
   try {
@@ -48,15 +35,29 @@ router.get('/all', async (req, res) => {
   }
 });
 
-router.get('/:idPetition/resultDistrict', async (req, res) => {
-  try {
-    const idPetition = req.params.idPetition;
-    const idDistrict = req.body.idDistrict;
-    const result = await Petition.resultDistrict(idPetition, idDistrict);
-    res.json(result);
-  } catch (error) {
-    console.log(error);
+// get result
+router.get('/:idPetition/resultGeneral', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['Petitions.result']
   }
+  await makeRequest(reqData);
+});
+
+router.get('/:idPetition/resultDistrict', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['Petitions.resultDistrict']
+  }
+  await makeRequest(reqData);
+});
+
+router.get('/:idPetition/resultRegion', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['Petitions.resultRegion']
+  }
+  await makeRequest(reqData);
 });
 
 module.exports = router;

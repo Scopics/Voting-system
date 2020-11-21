@@ -23,11 +23,10 @@ async function makeQuery(queryData) {
   const { queryParams, query } = queryData;
   const queryParamsArr = Object.values(queryParams);
   try {
-    const petitions = await pool.query(query, queryParamsArr);
-    return petitions.rows;
+    const result = await pool.query(query, queryParamsArr);
+    return result.rows;
   } catch(error) {
-    const petitions = await pool.query(query, queryParamsArr);
-    return petitions.rows;
+    console.log(error.message)
   }
 }
 

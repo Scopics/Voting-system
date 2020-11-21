@@ -6,6 +6,7 @@
     "Petitions.create" : "INSERT INTO petitions VALUES (default, $1, $2, $3, $4, $5;",
     "Petitions.result" : "SELECT petitions.name, count(petitions.petition_id) AS votes FROM petitions INNER JOIN petition_results ON petitions.petition_id = petition_results.petition_id WHERE petitions.petition_id = $1 GROUP BY petitions.name ORDER BY votes DESC;",
     "Petitions.resultDistrict" : "SELECT d.name, count(u.name) AS votes FROM users u INNER JOIN petition_results pr ON pr.user_id = u.user_id INNER JOIN petitions p ON p.petition_id = pr.petition_id INNER JOIN districts d ON u.district_id = d.district_id WHERE p.petition_id = $1 AND d.district_id = $2 GROUP BY d.name ORDER BY votes DESC;",
+    "Petitions.resultRegion" : "SELECT r.name, count(u.name) AS votes FROM users AS u INNER JOIN petition_results pr ON pr.user_id = u.user_id INNER JOIN petitions p  ON p.petition_id = pr.petition_id INNER JOIN districts d ON u.district_id = d.district_id INNER JOIN regions r ON r.region_id = d.region_id WHERE p.petition_id = $1 AND r.region_id = $2 GROUP BY r.name ORDER BY votes DESC;",
     "User.register" : "INSERT INTO users VALUES (default, $1, $2, $3, $4, $5, $6, $7, $8);",
     "User.login" : "SELECT * FROM users WHERE users.email = $1 AND users.password = $2;",
     "Voting.create": "INSERT INTO votings VALUES (default, $1, $2, $3, $4);",

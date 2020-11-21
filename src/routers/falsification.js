@@ -21,20 +21,18 @@ router.post('/create', async (req, res) => {
 
 // get specific falsification
 router.get('/:idFalsification', async (req, res) => {
-  try {
-    const idFalsification = req.params.idFalsification;
-    const result = await Falsification.getInfo(idFalsification);
-    res.json(result);
-  } catch (error) {
-    console.log(error);
-  }
+  const reqData = {
+    req, res,
+    query: queries['Falsification.getInfo']
+  };
+  await makeRequest(reqData);
 });
 
 // get all falsifications
 router.get('/all', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['Falsification.getInfo']
+    query: queries['Falsification.getAll']
   };
   await makeRequest(reqData);
 });
