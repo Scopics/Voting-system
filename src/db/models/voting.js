@@ -17,17 +17,6 @@ class Voting {
     }
   }
 
-  async getInfo(voting_id) {
-    try {
-      const votings = await pool.query(
-        "SELECT * FROM votings WHERE voting_id  = $1;", [voting_id]
-      );
-      return votings.rows;
-    } catch (error) {
-      return error.detail;
-    }
-  }
-
   async getVariants(voting_id) {
     try {
       const variants = await pool.query(

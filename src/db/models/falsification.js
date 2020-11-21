@@ -16,19 +16,6 @@ class Falsification {
     }
   }
 
-
-  async getAll() {
-    try {
-      const falsifications = await pool.query(
-        "SELECT * FROM falsifications"
-      );
-      return falsifications.rows[0];
-    } catch (error) {
-      return error.detail;
-    }
-  }
-
-
 }
 
 module.exports = new Falsification();
