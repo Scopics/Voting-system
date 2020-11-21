@@ -6,8 +6,6 @@ const { makeRequest } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const router = express.Router();
 
-
-
 // register
 router.post('/register', async (req, res) => {
   const reqData = {
@@ -26,5 +24,13 @@ router.post('/login', async (req, res) => {
     console.log(error);
   }
 });
+
+router.put('/updateStatus', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['User.updateStatus']
+  };
+  await makeRequest(reqData);
+})
 
 module.exports = router;

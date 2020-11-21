@@ -9,6 +9,7 @@
     "Petitions.resultRegion" : "SELECT r.name, count(u.name) AS votes FROM users AS u INNER JOIN petition_results pr ON pr.user_id = u.user_id INNER JOIN petitions p  ON p.petition_id = pr.petition_id INNER JOIN districts d ON u.district_id = d.district_id INNER JOIN regions r ON r.region_id = d.region_id WHERE p.petition_id = $2 AND r.region_id = $1 GROUP BY r.name ORDER BY votes DESC;",
     "User.register" : "INSERT INTO users VALUES (default, $1, $2, $3, $4, $5, $6, $7, $8);",
     "User.login" : "SELECT * FROM users WHERE users.email = $1 AND users.password = $2;",
+    "User.updateStatus" : "UPDATE users SET status = $1 WHERE user_id = $2;",
     "Voting.create": "INSERT INTO votings VALUES (default, $1, $2, $3, $4);",
     "Voting.getInfo" : "SELECT * FROM votings WHERE voting_id  = $1;",
     "Voting.getVariants" : "SELECT * FROM variants WHERE voting_id = $1",
