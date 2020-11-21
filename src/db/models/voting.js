@@ -4,18 +4,6 @@ const pool = require('../db');
 const { queries } = require('../resources');
 
 class Voting {
-  async create(votingData) {
-    const queryData = Object.values(votingData);
-    const createVotingQuery = queries['Voting.create'];
-    try {
-      await pool.query(
-        createVotingQuery, queryData
-      );
-      return true;
-    } catch (error) {
-      return error.detail;
-    }
-  }
 
   async getVariants(voting_id) {
     try {
