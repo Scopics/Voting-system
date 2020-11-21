@@ -2,6 +2,8 @@
 
 const Voting = require('../db/models/voting');
 const express = require('express');
+const { makeRequest } = require('../db/resources');
+const queries = require('../resources/queries.json');
 const router = express.Router();
 
 //create voting
@@ -47,12 +49,11 @@ router.get('/:idVoting/variants', async (req, res) => {
 
 // get all votings
 router.get('/all', async (req, res) => {
-  try {
-    const result = await Voting.getAll();
-    res.json(result);
-  } catch (error) {
-    console.log(error);
-  }
+  const reqData = {
+    req, res,
+    query: queries['Voting.getAll']
+  };
+  await makeRequest(reqData);
 });
 
 // get current votings
@@ -67,26 +68,19 @@ router.get('/current', async (req, res) => {
 
 // get result
 router.get('/:idVoting/resultGeneral', async (req, res) => {
-  try {
-    const idVoting = req.params.idVoting;
-    const result = await Voting.result(idVoting);
-    res.json(result);
-  } catch (error) {
-    console.log(error);
-  }
+  const reqData = {
+    req, res,
+    query: queries['Voting.result']
+  };
+  await makeRequest(reqData);
 });
 
 router.get('/:idVoting/resultDistrict', async (req, res) => {
-  try {
-    const idVoting = req.params.idVoting;
-    const idDistrict = req.body.idDistrict;
-    const result = await Voting.resultDistrict(idVoting, idDistrict);
-    res.json(result);
-  } catch (error) {
-    console.log(error);
-  }
+  const reqData = {
+    req, res,
+    query: queries['Voting.resultDistrict']
+  };
+  await makeRequest(reqData);
 });
-
-
 
 module.exports = router;
