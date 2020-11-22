@@ -22,7 +22,8 @@ router.post('/create', async (req, res) => {
 router.get('/:idPetition', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['Petitions.getInfo']
+    query: queries['Petitions.getInfo'],
+    queryParamsOrder: order['Petitions.getInfo']
   }
   await makeRequest(reqData);
 })
@@ -41,7 +42,8 @@ router.get('/all', async (req, res) => {
 router.get('/:idPetition/vote', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['Petition_results.addVote']
+    query: queries['Petition_results.addVote'],
+    queryParamsOrder: order['Petition_results.addVote']
   }
   await makeRequest(reqData);
 });

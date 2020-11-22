@@ -11,7 +11,8 @@ const router = express.Router();
 router.post('/create', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['Voting.create']
+    query: queries['Voting.create'],
+    queryParamsOrder: order['Voting.create']
   }
   await makeRequest(reqData);
 });

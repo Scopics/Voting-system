@@ -4,6 +4,7 @@ const User = require('../db/models/user');
 const express = require('express');
 const { makeRequest } = require('../db/resources');
 const queries = require('../resources/queries.json');
+const order = require('../resources/order.json');
 const router = express.Router();
 
 // register
@@ -28,7 +29,8 @@ router.post('/login', async (req, res) => {
 router.put('/updateStatus', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['User.updateStatus']
+    query: queries['User.updateStatus'],
+    queryParamsOrder: order['User.updateStatus']
   };
   await makeRequest(reqData);
 })
