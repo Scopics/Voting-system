@@ -11,18 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
 
-const votingRouter = require('./routers/voting.js');
-app.use('/voting', votingRouter);
-
-const userRouter = require('./routers/user.js');
-app.use('/user', userRouter);
-
-const petitionRouter = require('./routers/petition.js');
-app.use('/petition', petitionRouter);
-
-const falsificationRouter = require('./routers/falsification.js');
-app.use('/falsification', falsificationRouter);
-
+const routeSetter = require('./routers/routeSetter.js');
+routeSetter(app);
 
 app.get('/', (req, res) => {
   pool.query('SELECT * FROM votings ORDER BY start_date DESC')
