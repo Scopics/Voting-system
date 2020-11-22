@@ -54,6 +54,7 @@ router.get('/current', async (req, res) => {
     query: queries['Voting.getCurrent'],
     queryParamsOrder: order['Voting.getCurrent'],
   };
+  await makeRequest(reqData);
 });
 
 // get result

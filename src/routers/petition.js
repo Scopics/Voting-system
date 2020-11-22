@@ -35,6 +35,7 @@ router.get('/all', async (req, res) => {
     query: queries['Petition.getAll'],
     queryParamsOrder: order['Petition.getAll']
   }
+  await makeRequest(reqData);
 });
 
 //vote for petition

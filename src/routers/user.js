@@ -23,6 +23,7 @@ router.post('/login', async (req, res) => {
     query: queries['User.login'],
     queryParamsOrder: order['User.login'],
   };
+  await makeRequest(reqData);
 });
 
 router.put('/updateStatus', async (req, res) => {

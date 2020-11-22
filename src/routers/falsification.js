@@ -16,6 +16,7 @@ router.post('/create', async (req, res) => {
     query: queries['Falsification.create'],
     queryParamsOrder: order['Falsification.create'],
   };
+  await makeRequest(reqData);
 });
 
 // get specific falsification
