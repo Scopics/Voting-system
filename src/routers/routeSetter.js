@@ -1,36 +1,33 @@
 const queries = require('../resources/queries.json');
-
 const express = require('express');
 const { makeRequest } = require('../db/resources');
 
-
-function setRouters(app){
-  for(const routerName in queries){
+function routeSetter(app){
+  for(const i in queries){
     const router = express.Router();
-    for(const route in queries[routerName]["routes"]){
-      const query = queries[route];
+    for(const route of queries[i].routes){
       const callback = async (req, res) => {
       const reqData = {
         req, res,
-        query: query.query,
-        queryParamsOrder: query.order,
+        query: route.query,
+        queryParamsOrder: route.order,
       };
       await makeRequest(reqData);
     }
-    if(query.type == "get"){
-      router.get(query.path, callback);
+    if(route.type == 'get'){
+      router.get(route.path, callback);
     }
-    else if(query.type == "post"){
-      router.post(query.path, callback);
+    else if(route.type == 'post'){
+      router.post(route.path, callback);
     }
-    else if(query.type == "put"){
-      router.put(query.path, callback);
+    else if(route.type == 'put'){
+      router.put(route.path, callback);
     }
   }
-  app.use(queries[routerName], router)
+  app.use(queries[i].path, router)
   }
 }
 
 
 
-module.exports = { setRouters };
+module.exports = { routeSetter };
