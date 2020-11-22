@@ -41,7 +41,8 @@ router.get('/:idVoting/variants', async (req, res) => {
 router.get('/all', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['Voting.getAll']
+    query: queries['Voting.getAll'],
+    queryParamsOrder: order['Voting.getAll'],
   };
   await makeRequest(reqData);
 });
@@ -60,7 +61,8 @@ router.get('/current', async (req, res) => {
 router.get('/:idVoting/resultGeneral', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['Voting.result']
+    query: queries['Voting.result'],
+    queryParamsOrder: order['Voting.resultDistrict'],
   };
   await makeRequest(reqData);
 });
@@ -68,7 +70,8 @@ router.get('/:idVoting/resultGeneral', async (req, res) => {
 router.get('/:idVoting/resultDistrict', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['Voting.resultDistrict']
+    query: queries['Voting.resultDistrict'],
+    queryParamsOrder: order['Voting.resultDistrict'],
   };
   await makeRequest(reqData);
 });

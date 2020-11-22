@@ -24,7 +24,8 @@ router.post('/create', async (req, res) => {
 router.get('/:idFalsification', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['Falsification.getInfo']
+    query: queries['Falsification.getInfo'],
+    queryParamsOrder: order['Falsification.getInfo'],
   };
   await makeRequest(reqData);
 });

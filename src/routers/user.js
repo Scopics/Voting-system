@@ -11,7 +11,8 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['User.login']
+    query: queries['User.login'],
+    queryParamsOrder: order['User.login'],
   };
   await makeRequest(reqData);
 });
@@ -33,6 +34,6 @@ router.put('/updateStatus', async (req, res) => {
     queryParamsOrder: order['User.updateStatus']
   };
   await makeRequest(reqData);
-})
+});
 
 module.exports = router;
