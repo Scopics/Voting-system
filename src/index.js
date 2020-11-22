@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
 
-const routeSetter = require('./routers/routeSetter.js');
+const { routeSetter } = require('./routers/routeSetter.js');
 routeSetter(app);
 
 app.get('/', (req, res) => {
