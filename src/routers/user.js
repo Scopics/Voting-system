@@ -11,20 +11,18 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['User.login'],
-    queryParamsOrder: order['User.login'],
+    query: queries['User.register'],
+    queryParamsOrder: order['User.register'],
   };
   await makeRequest(reqData);
 });
 
 router.post('/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    const result = User.login(email, password);
-    res.json(result);
-  } catch (error) {
-    console.log(error);
-  }
+  const reqData = {
+    req, res,
+    query: queries['User.login'],
+    queryParamsOrder: order['User.login'],
+  };
 });
 
 router.put('/updateStatus', async (req, res) => {

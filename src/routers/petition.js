@@ -30,11 +30,10 @@ router.get('/:idPetition', async (req, res) => {
 
 // get all
 router.get('/all', async (req, res) => {
-  try {
-    const result = await Petition.getAll();
-    res.json(result);
-  } catch (error) {
-    console.log(error);
+  const reqData = {
+    req, res,
+    query: queries['Petition.getAll'],
+    queryParamsOrder: order['Petition.getAll']
   }
 });
 

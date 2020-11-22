@@ -49,12 +49,11 @@ router.get('/all', async (req, res) => {
 
 // get current votings
 router.get('/current', async (req, res) => {
-  try {
-    const result = await Voting.getCurrent();
-    res.json(result);
-  } catch (error) {
-    console.log(error);
-  }
+  const reqData = {
+    req, res,
+    query: queries['Voting.getCurrent'],
+    queryParamsOrder: order['Voting.getCurrent'],
+  };
 });
 
 // get result
