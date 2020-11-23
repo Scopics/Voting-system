@@ -35,4 +35,13 @@ router.put('/updateStatus', async (req, res) => {
   await makeRequest(reqData);
 });
 
+router.get('/:idUser', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['User.getInfo'],
+    queryParamsOrder: order['User.getInfo'],
+  };
+  await makeRequest(reqData);
+});
+
 module.exports = router;

@@ -76,4 +76,13 @@ router.get('/:idVoting/resultDistrict', async (req, res) => {
   await makeRequest(reqData);
 });
 
+router.get('/:idVoting/vote', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['Voting_results.addVote'],
+    queryParamsOrder: order['Voting_results.addVote']
+  }
+  await makeRequest(reqData);
+});
+
 module.exports = router;

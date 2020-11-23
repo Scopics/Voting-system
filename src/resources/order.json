@@ -7,9 +7,11 @@
     "Petition.result" : ["petition_id"],
     "Petition.resultDistrict" : ["petition_id", "district_id"],
     "Petition.resultRegion" : ["petition_id", "region_id"],
+    "Petition.getCurrent" : [],
     "User.register" : ["name", "surname", "birthday_date", "gender", "district_id", "email", "password", "status"],
     "User.login" : ["email", "password"],
     "User.updateStatus" : ["status", "user_id"],
+    "User.getInfo" : ["user_id"],
     "Voting.create": ["name", "description", "start_date", "end_date"],
     "Voting.getInfo" : ["voting_id"],
     "Voting.getVariants" : ["voting_id"],
@@ -17,5 +19,6 @@
     "Voting.getCurrent" : [],
     "Voting.result" : ["voting_id"],
     "Voting.resultDistrict" : ["voting_id", "district_id"],
-    "Petition_results.addVote" : ["user_id", "petition_id"]
+    "Petition_results.addVote" : ["user_id", "petition_id"],
+    "Voting_results.addVote" : ["voting_id", "variant_id", "user_id"]
 }

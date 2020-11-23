@@ -76,4 +76,13 @@ router.get('/:idPetition/resultDistrict', async (req, res) => {
   await makeRequest(reqData);
 });
 
+router.get('/current', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['Petition.getCurrent'],
+    queryParamsOrder: order['Petition.getCurrent'],
+  };
+  await makeRequest(reqData);
+});
+
 module.exports = router;
