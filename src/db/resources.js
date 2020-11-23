@@ -1,7 +1,6 @@
-const fs = require("fs");
-const pool = require('../db/db');
-const fileContent = fs.readFileSync('src/resources/queries.json');
-const queries = JSON.parse(fileContent);
+const pool = require('./db');
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
 
 function getQueryParamsArr(queryParams, queryParamsOrder) {
   if (!queryParamsOrder)
@@ -42,4 +41,13 @@ async function makeQuery(queryData) {
   }
 }
 
-module.exports = { queries, makeRequest, makeQuery };
+function tokenGenerator(user_id){
+    const payload = {
+        userId : user_id
+    };
+    return jwt.sign(payload, process.env.JWTSECRET, { expiresIn : "1hr" });
+} 
+
+const tokenDecoder = token => jwt.decode(token);
+
+module.exports = { makeRequest, makeQuery, tokenGenerator, tokenDecoder };
