@@ -4,6 +4,10 @@ SELECT * FROM votings ORDER BY start_date DESC;
 
 --2. Вывод только тех голосований которые идут сейчас
 
+-- По дате и времени
+
+SELECT * FROM votings WHERE (start_date < NOW() AND NOW() < end_date);
+
 -- Только по дате
 
 SELECT * FROM votings WHERE (DATE(end_date) >= CURRENT_DATE) AND (DATE(start_date) <= CURRENT_DATE);
@@ -14,7 +18,9 @@ SELECT * FROM petitions ORDER BY start_date DESC;
 
 --4. Вывод тех петиций которые идут сейчас
 
+-- По дате и времени
 
+SELECT * FROM petitions WHERE (start_date < NOW() AND NOW() < end_date);
 
 -- Только по дате
 
@@ -24,6 +30,9 @@ SELECT * FROM petitions WHERE (DATE(end_date) >= CURRENT_DATE) AND (DATE(start_d
 
 INSERT INTO petitions VALUES (default, ${name}, ${description}, ${author_user_id}, ${start_date}, ${end_date});
 
+--6. Запрос на добавление нового голосования
+
+INSERT INTO votings VALUES (default, ${name}, ${description}, ${start_date}, ${end_date});
 
 --7. Запрос на добавление вариантов для голосования
 
@@ -84,10 +93,15 @@ SELECT vr.variant_id, COUNT(variant_id) AS num_voters
     GROUP BY vr.variant_id
     ORDER by num_voters DESC;
 
+SELECT variants.name, COUNT(users.name) AS votes
+    FROM voting_results, users, variants
+    WHERE voting_results.user_id = users.user_id AND voting_results.variant_id = variants.variant_id AND
+        voting_results.voting_id = ${voting_id} AND users.district_id = ${district_id}
+    GROUP BY variants.name
+    ORDER BY votes DESC;
+
 
 --13. Запрос для подсчёта голосов для определенного голосования по вариантам в определенном регионе в порядке убывания
-
-
 
 SELECT variants.name, COUNT(users.name) AS votes
     FROM users
@@ -136,7 +150,13 @@ SELECT districts.name, count(users.name) AS votes
 
 --15. Запрос для подсчёта голосов за определенную петицию по регионам в порядке убывания
 
-
+SELECT petition_id, districts.region_id, COUNT(*)
+    FROM petition_results
+    INNER JOIN users ON petition_results.user_id = users.user_id
+    INNER JOIN districts ON users.district_id = districts.district_id
+    WHERE petitions_id = ${petition_id}
+    GROUP BY petition_id, districts.region_id
+    ORDER BY count DESC, region_id;
 
 SELECT regions.name, count(users.name) AS votes
     FROM users
