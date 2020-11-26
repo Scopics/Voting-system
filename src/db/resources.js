@@ -41,9 +41,10 @@ async function makeQuery(queryData) {
   }
 }
 
-function tokenGenerator(user_id) {
+function tokenGenerator(user_id, email) {
   const payload = {
-    userId: user_id
+    userId: user_id,
+    email: email
   };
   return jwt.sign(payload, process.env.JWTSECRET, { expiresIn: '1hr' });
 }
