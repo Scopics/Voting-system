@@ -1,5 +1,5 @@
 const pool = require('./db');
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 function getQueryParamsArr(queryParams, queryParamsOrder) {
@@ -11,11 +11,11 @@ function getQueryParamsArr(queryParams, queryParamsOrder) {
 }
 
 async function makeRequest(reqData) {
-  const {req, res, query, queryParamsOrder} = reqData;
+  const { req, res, query, queryParamsOrder } = reqData;
   const reqParams = req.params;
   const reqQuery = req.query;
-  const queryParamsUnordered = {...reqQuery, ...reqParams};
-  const queryParamsOrdered = 
+  const queryParamsUnordered = { ...reqQuery, ...reqParams };
+  const queryParamsOrdered =
     getQueryParamsArr(queryParamsUnordered, queryParamsOrder);
   const queryData = {
     queryParams: queryParamsOrdered,
@@ -36,18 +36,22 @@ async function makeQuery(queryData) {
   try {
     const result = await pool.query(query, queryParamsArr);
     return result.rows;
-  } catch(error) {
-    console.log(error.message)
+  } catch (error) {
+    console.log(error.message);
   }
 }
 
-function tokenGenerator(user_id){
-    const payload = {
-        userId : user_id
-    };
-    return jwt.sign(payload, process.env.JWTSECRET, { expiresIn : "1hr" });
-} 
+function tokenGenerator(user_id) {
+  const payload = {
+    userId: user_id
+  };
+  return jwt.sign(payload, process.env.JWTSECRET, { expiresIn: '1hr' });
+}
 
 const tokenDecoder = token => jwt.decode(token);
 
-module.exports = { makeRequest, makeQuery, tokenGenerator, tokenDecoder };
+module.exports = {
+  makeRequest,
+  makeQuery,
+  tokenGenerator,
+  tokenDecoder };

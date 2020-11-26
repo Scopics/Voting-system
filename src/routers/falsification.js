@@ -1,6 +1,5 @@
 'use strict';
 
-const Falsification = require('../db/models/falsification');
 const express = require('express');
 const { makeRequest } = require('../db/resources');
 const queries = require('../resources/queries.json');

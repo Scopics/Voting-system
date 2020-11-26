@@ -1,6 +1,5 @@
 'use strict';
 
-const User = require('../db/models/user');
 const express = require('express');
 const { makeRequest } = require('../db/resources');
 const queries = require('../resources/queries.json');

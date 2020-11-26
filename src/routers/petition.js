@@ -1,6 +1,5 @@
 'use strict';
 
-const Petition = require('../db/models/petition');
 const express = require('express');
 const { response } = require('express');
 const { makeRequest } = require('../db/resources');

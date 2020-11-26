@@ -1,6 +1,5 @@
 'use strict';
 
-const Voting = require('../db/models/voting');
 const express = require('express');
 const { makeRequest } = require('../db/resources');
 const queries = require('../resources/queries.json');
