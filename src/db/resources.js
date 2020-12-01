@@ -15,13 +15,14 @@ async function makeRequest(reqData) {
   const reqParams = req.params;
   const reqQuery = req.query;
   const queryParamsUnordered = { ...reqQuery, ...reqParams };
+
   const queryParamsOrdered =
     getQueryParamsArr(queryParamsUnordered, queryParamsOrder);
   const queryData = {
     queryParams: queryParamsOrdered,
-    queryParamsOrder,
     query
   };
+  
   try {
     const result = await makeQuery(queryData);
     res.json(result);
