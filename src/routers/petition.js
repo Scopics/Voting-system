@@ -18,7 +18,7 @@ router.post('/create', async (req, res) => {
 });
 
 //get info for petition
-router.get('/:idPetition', async (req, res) => {
+router.get('/:petition_id', async (req, res) => {
   const reqData = {
     req, res,
     query: queries['Petition.getInfo'],
@@ -38,7 +38,7 @@ router.get('/all', async (req, res) => {
 });
 
 //vote for petition
-router.get('/:idPetition/vote', async (req, res) => {
+router.get('/:petition_id/vote', async (req, res) => {
   const reqData = {
     req, res,
     query: queries['Petition_result.addVote'],
@@ -57,7 +57,8 @@ router.get('/:idPetition/resultGeneral', async (req, res) => {
   await makeRequest(reqData);
 });
 
-router.get('/:idPetition/resultRegion', async (req, res) => {
+//get result for petition in region
+router.get('/:petition_id/resultRegion', async (req, res) => {
   const reqData = {
     req, res,
     query: queries['Petition.resultRegion'],
