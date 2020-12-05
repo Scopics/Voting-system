@@ -56,8 +56,8 @@ router.get('/current', async (req, res) => {
   await makeRequest(reqData);
 });
 
-// get result
-router.get('/:idVoting/resultGeneral', async (req, res) => {
+// get result general
+router.get('/:voting_id/resultGeneral', async (req, res) => {
   const reqData = {
     req, res,
     query: queries['Voting.result'],
@@ -66,7 +66,8 @@ router.get('/:idVoting/resultGeneral', async (req, res) => {
   await makeRequest(reqData);
 });
 
-router.get('/:idVoting/resultDistrict', async (req, res) => {
+// get result by district
+router.get('/:voting_id/resultDistrict', async (req, res) => {
   const reqData = {
     req, res,
     query: queries['Voting.resultDistrict'],

@@ -18,8 +18,8 @@ router.post('/create', async (req, res) => {
   await makeRequest(reqData);
 });
 
-// get specific falsification
-router.get('/:idFalsification', async (req, res) => {
+// get info about specific falsification
+router.get('/:falsification_id', async (req, res) => {
   const reqData = {
     req, res,
     query: queries['Falsification.getInfo'],
