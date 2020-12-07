@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const { makeRequest } = require('../db/resources');
+const { makeRequest, authorizate, tokenGenerator } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
 const router = express.Router();
@@ -36,16 +36,6 @@ router.get('/current', async (req, res) => {
   await makeRequest(reqData);
 });
 
-// get specific voting
-router.get('/:voting_id', async (req, res) => {
-  const reqData = {
-    req, res,
-    query: queries['Voting.getInfo'],
-    queryParamsOrder: order['Voting.getInfo'],
-  };
-  await makeRequest(reqData);
-});
-
 // get variants for specific voting
 router.get('/:voting_id/variants', async (req, res) => {
   const reqData = {
@@ -76,12 +66,22 @@ router.get('/:voting_id/resultDistrict', async (req, res) => {
   await makeRequest(reqData);
 });
 
-router.get('/:voting_id/vote', async (req, res) => {
+router.post('/:voting_id/vote', async (req, res) => {
   const reqData = {
     req, res,
     query: queries['Voting_results.addVote'],
     queryParamsOrder: order['Voting_results.addVote']
   }
+  await makeRequest(reqData);
+});
+
+// get specific voting
+router.get('/:voting_id', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['Voting.getInfo'],
+    queryParamsOrder: order['Voting.getInfo'],
+  };
   await makeRequest(reqData);
 });
 

@@ -10,7 +10,7 @@ function getQueryParamsArr(queryParams, queryParamsOrder) {
   return queryParamsArr;
 }
 
-async function makeRequest(reqData) {
+async function makeRequest(reqData, authentification) {
   const { req, res, query, queryParamsOrder } = reqData;
   const reqParams = req.params;
   const reqQuery = req.query;
@@ -24,10 +24,16 @@ async function makeRequest(reqData) {
   };
   
   try {
-    const result = await makeQuery(queryData);
-    res.json(result);
+    if (authentification) {
+      const { email, password } = queryParamsUnordered;
+      const token = tokenGenerator(email, password);
+      res.json({ token });
+    } else {
+      const result = await makeQuery(queryData);
+      res.json(result);
+    }
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 }
 
@@ -42,18 +48,28 @@ async function makeQuery(queryData) {
   }
 }
 
-function tokenGenerator(user_id, email) {
+function tokenGenerator(email, password) {
   const payload = {
-    userId: user_id,
-    email: email
+    email,
+    password
   };
-  return jwt.sign(payload, process.env.JWTSECRET, { expiresIn: '1hr' });
+  return jwt.sign(payload, process.env.JWTSECRET);
 }
 
 const tokenDecoder = token => jwt.decode(token);
+
+async function authorizate (token) {
+  const decodedData = tokenDecoder(token);
+  const email = decodedData.email;
+  const password = decodedData.password;
+  const result = await pool.query(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}';`);
+  return !!result.rows.length;
+}
 
 module.exports = {
   makeRequest,
   makeQuery,
   tokenGenerator,
-  tokenDecoder };
+  tokenDecoder,
+  authorizate
+};

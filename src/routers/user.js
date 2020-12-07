@@ -13,7 +13,7 @@ router.post('/register', async (req, res) => {
     query: queries['User.register'],
     queryParamsOrder: order['User.register'],
   };
-  await makeRequest(reqData);
+  await makeRequest(reqData, true);
 });
 
 router.post('/login', async (req, res) => {
