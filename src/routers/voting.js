@@ -16,26 +16,6 @@ router.post('/create', async (req, res) => {
   await makeRequest(reqData);
 });
 
-// get specific voting
-router.get('/:voting_id', async (req, res) => {
-  const reqData = {
-    req, res,
-    query: queries['Voting.getInfo'],
-    queryParamsOrder: order['Voting.getInfo'],
-  };
-  await makeRequest(reqData);
-});
-
-// get variants for specific voting
-router.get('/:voting_id/variants', async (req, res) => {
-  const reqData = {
-    req, res,
-    query: queries['Voting.getVariants'],
-    queryParamsOrder: order['Voting.getVariants'],
-  };
-  await makeRequest(reqData);
-});
-
 // get all votings
 router.get('/all', async (req, res) => {
   const reqData = {
@@ -52,6 +32,26 @@ router.get('/current', async (req, res) => {
     req, res,
     query: queries['Voting.getCurrent'],
     queryParamsOrder: order['Voting.getCurrent'],
+  };
+  await makeRequest(reqData);
+});
+
+// get specific voting
+router.get('/:voting_id', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['Voting.getInfo'],
+    queryParamsOrder: order['Voting.getInfo'],
+  };
+  await makeRequest(reqData);
+});
+
+// get variants for specific voting
+router.get('/:voting_id/variants', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['Voting.getVariants'],
+    queryParamsOrder: order['Voting.getVariants'],
   };
   await makeRequest(reqData);
 });

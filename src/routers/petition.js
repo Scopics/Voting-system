@@ -17,15 +17,14 @@ router.post('/create', async (req, res) => {
   await makeRequest(reqData);
 });
 
-//get info for petition
-router.get('/:petition_id', async (req, res) => {
+router.get('/current', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['Petition.getInfo'],
-    queryParamsOrder: order['Petition.getInfo']
-  }
+    query: queries['Petition.getCurrent'],
+    queryParamsOrder: order['Petition.getCurrent'],
+  };
   await makeRequest(reqData);
-})
+});
 
 // get all
 router.get('/all', async (req, res) => {
@@ -36,6 +35,16 @@ router.get('/all', async (req, res) => {
   }
   await makeRequest(reqData);
 });
+
+//get info for petition
+router.get('/:petition_id', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['Petition.getInfo'],
+    queryParamsOrder: order['Petition.getInfo']
+  }
+  await makeRequest(reqData);
+})
 
 //vote for petition
 router.get('/:petition_id/vote', async (req, res) => {
@@ -76,13 +85,5 @@ router.get('/:petition_id/resultDistrict', async (req, res) => {
   await makeRequest(reqData);
 });
 
-router.get('/current', async (req, res) => {
-  const reqData = {
-    req, res,
-    query: queries['Petition.getCurrent'],
-    queryParamsOrder: order['Petition.getCurrent'],
-  };
-  await makeRequest(reqData);
-});
 
 module.exports = router;
