@@ -34,7 +34,7 @@ router.put('/updateStatus', async (req, res) => {
   await makeRequest(reqData);
 });
 
-router.get('/:idUser', async (req, res) => {
+router.get('/:user_id', async (req, res) => {
   const reqData = {
     req, res,
     query: queries['User.getInfo'],

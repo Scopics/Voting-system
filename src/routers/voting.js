@@ -17,7 +17,7 @@ router.post('/create', async (req, res) => {
 });
 
 // get specific voting
-router.get('/:idVoting', async (req, res) => {
+router.get('/:voting_id', async (req, res) => {
   const reqData = {
     req, res,
     query: queries['Voting.getInfo'],
@@ -27,7 +27,7 @@ router.get('/:idVoting', async (req, res) => {
 });
 
 // get variants for specific voting
-router.get('/:idVoting/variants', async (req, res) => {
+router.get('/:voting_id/variants', async (req, res) => {
   const reqData = {
     req, res,
     query: queries['Voting.getVariants'],
@@ -76,7 +76,7 @@ router.get('/:voting_id/resultDistrict', async (req, res) => {
   await makeRequest(reqData);
 });
 
-router.get('/:idVoting/vote', async (req, res) => {
+router.get('/:voting_id/vote', async (req, res) => {
   const reqData = {
     req, res,
     query: queries['Voting_results.addVote'],
