@@ -1,3 +1,4 @@
+'use strict';
 const pool = require('./db');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -22,7 +23,7 @@ async function makeRequest(reqData, authentification) {
     queryParams: queryParamsOrdered,
     query
   };
-  
+
   try {
     if (authentification) {
       const { email, password } = queryParamsUnordered;
@@ -58,11 +59,13 @@ function tokenGenerator(email, password) {
 
 const tokenDecoder = token => jwt.decode(token);
 
-async function authorizate (token) {
+async function authorizate(token) {
   const decodedData = tokenDecoder(token);
   const email = decodedData.email;
   const password = decodedData.password;
-  const result = await pool.query(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}';`);
+  const result = await pool.query(
+    `SELECT * FROM users WHERE email = '${email}' AND password = '${password}';`
+  );
   return !!result.rows.length;
 }
 

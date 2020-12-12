@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express');
-const { response } = require('express');
 const { makeRequest } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
@@ -13,7 +12,7 @@ router.post('/create', async (req, res) => {
     req, res,
     query: queries['Petition.create'],
     queryParamsOrder: order['Petition.create'],
-  }
+  };
   await makeRequest(reqData);
 });
 
@@ -32,7 +31,7 @@ router.get('/all', async (req, res) => {
     req, res,
     query: queries['Petition.getAll'],
     queryParamsOrder: order['Petition.getAll']
-  }
+  };
   await makeRequest(reqData);
 });
 
@@ -42,9 +41,9 @@ router.get('/:petition_id', async (req, res) => {
     req, res,
     query: queries['Petition.getInfo'],
     queryParamsOrder: order['Petition.getInfo']
-  }
+  };
   await makeRequest(reqData);
-})
+});
 
 //vote for petition
 router.get('/:petition_id/vote', async (req, res) => {
@@ -52,7 +51,7 @@ router.get('/:petition_id/vote', async (req, res) => {
     req, res,
     query: queries['Petition_result.addVote'],
     queryParamsOrder: order['Petition_result.addVote']
-  }
+  };
   await makeRequest(reqData);
 });
 
@@ -62,7 +61,7 @@ router.get('/:petition_id/resultGeneral', async (req, res) => {
     req, res,
     query: queries['Petition.result'],
     queryParamsOrder: order['Petition.result'],
-  }
+  };
   await makeRequest(reqData);
 });
 
@@ -72,7 +71,7 @@ router.get('/:petition_id/resultRegion', async (req, res) => {
     req, res,
     query: queries['Petition.resultRegion'],
     queryParamsOrder: order['Petition.resultRegion'],
-  }
+  };
   await makeRequest(reqData);
 });
 
@@ -81,7 +80,7 @@ router.get('/:petition_id/resultDistrict', async (req, res) => {
     req, res,
     query: queries['Petition.resultDistrict'],
     queryParamsOrder: order['Petition.resultDistrict'],
-  }
+  };
   await makeRequest(reqData);
 });
 

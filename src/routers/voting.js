@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const { makeRequest, authorizate, tokenGenerator } = require('../db/resources');
+const { makeRequest } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
 const router = express.Router();
@@ -12,7 +12,7 @@ router.post('/create', async (req, res) => {
     req, res,
     query: queries['Voting.create'],
     queryParamsOrder: order['Voting.create']
-  }
+  };
   await makeRequest(reqData);
 });
 
@@ -71,7 +71,7 @@ router.post('/:voting_id/vote', async (req, res) => {
     req, res,
     query: queries['Voting_results.addVote'],
     queryParamsOrder: order['Voting_results.addVote']
-  }
+  };
   await makeRequest(reqData);
 });
 
