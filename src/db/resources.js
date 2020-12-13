@@ -66,7 +66,7 @@ async function authorizate(token) {
   const result = await pool.query(
     `SELECT * FROM users WHERE email = '${email}' AND password = '${password}';`
   );
-  return !!result.rows.length;
+  return result.rows[0];
 }
 
 module.exports = {
