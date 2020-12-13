@@ -28,7 +28,6 @@ async function makeRequest(reqData, authentification) {
     if (authentification) {
       const { email, password } = queryParamsUnordered;
       const token = tokenGenerator(email, password);
-      await makeQuery(queryData);
       res.json({ token });
     } else {
       const result = await makeQuery(queryData);
@@ -36,7 +35,6 @@ async function makeRequest(reqData, authentification) {
     }
   } catch (error) {
     console.log(error.message);
-    res.status(404).send('Error in query to db');
   }
 }
 
@@ -61,23 +59,14 @@ function tokenGenerator(email, password) {
 
 const tokenDecoder = token => jwt.decode(token);
 
-async function authorizate(res, token) {
+async function authorizate(token) {
   const decodedData = tokenDecoder(token);
-  if (decodedData === null) {
-    res.status(401).send('Error in authorization');
-    return 0;
-  }
   const email = decodedData.email;
   const password = decodedData.password;
-  try {
-    const result = await pool.query(
-      `SELECT * FROM users WHERE email = '${email}' AND password = '${password}';`
-    );
-    return result.rows[0];
-  } catch (error) {
-    console.log(error.message);
-    res.status(404).send('Error in query to db');
-  }
+  const result = await pool.query(
+    `SELECT * FROM users WHERE email = '${email}' AND password = '${password}';`
+  );
+  return result.rows[0];
 }
 
 module.exports = {
