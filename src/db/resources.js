@@ -36,7 +36,7 @@ async function makeRequest(reqData, authentification) {
     }
   } catch (error) {
     console.log(error.message);
-    res.status(404).send('Error in query to db');
+    res.status(404).send('Error in query to db.');
   }
 }
 
@@ -61,10 +61,17 @@ function tokenGenerator(email, password) {
 
 const tokenDecoder = token => jwt.decode(token);
 
+const checkedRequest = async (res, expected, available, reqData) => {
+  if (expected === available) await makeRequest(reqData);
+  else res
+    .status(403)
+    .send('You don\'t have permission to access this resource.');
+};
+
 async function authorizate(res, token) {
   const decodedData = tokenDecoder(token);
   if (decodedData === null) {
-    res.status(401).send('Error in authorization');
+    res.status(401).send('Error in authorization.');
     return 0;
   }
   const email = decodedData.email;
@@ -76,7 +83,7 @@ async function authorizate(res, token) {
     return result.rows[0];
   } catch (error) {
     console.log(error.message);
-    res.status(404).send('Error in query to db');
+    res.status(404).send('Error in query to db.');
   }
 }
 
@@ -85,5 +92,6 @@ module.exports = {
   makeQuery,
   tokenGenerator,
   tokenDecoder,
+  checkedRequest,
   authorizate
 };
