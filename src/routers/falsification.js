@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const { makeRequest } = require('../db/resources');
+const { makeRequest, authorizate } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
 const router = express.Router();
@@ -15,7 +15,10 @@ router.post('/create', async (req, res) => {
     query: queries['Falsification.create'],
     queryParamsOrder: order['Falsification.create'],
   };
-  await makeRequest(reqData);
+  const userInfo = await authorizate(res, req.query.token);
+  if (Object.prototype.hasOwnProperty.call(userInfo, 'user_id')) {
+    await makeRequest(reqData);
+  }
 });
 
 // get info about specific falsification

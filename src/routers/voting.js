@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const { makeRequest } = require('../db/resources');
+const { makeRequest, authorizate, checkedRequest } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
 const router = express.Router();
@@ -13,7 +13,11 @@ router.post('/create', async (req, res) => {
     query: queries['Voting.create'],
     queryParamsOrder: order['Voting.create']
   };
-  await makeRequest(reqData);
+  const userInfo = await authorizate(res, req.query.token);
+  if (Object.prototype.hasOwnProperty.call(userInfo, 'user_id')) {
+    const expectedStatus = 1;
+    await checkedRequest(res, expectedStatus, userInfo.status, reqData);
+  }
 });
 
 // get all votings
@@ -72,7 +76,10 @@ router.post('/:voting_id/vote', async (req, res) => {
     query: queries['Voting_results.addVote'],
     queryParamsOrder: order['Voting_results.addVote']
   };
-  await makeRequest(reqData);
+  const userInfo = await authorizate(res, req.query.token);
+  if (Object.prototype.hasOwnProperty.call(userInfo, 'user_id')) {
+    await makeRequest(reqData);
+  }
 });
 
 // get specific voting

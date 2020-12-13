@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const { makeRequest } = require('../db/resources');
+const { makeRequest, authorizate, checkedRequest } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
 const router = express.Router();
@@ -22,7 +22,7 @@ router.post('/login', async (req, res) => {
     query: queries['User.login'],
     queryParamsOrder: order['User.login'],
   };
-  await makeRequest(reqData);
+  await makeRequest(reqData, true);
 });
 
 router.put('/updateStatus', async (req, res) => {
@@ -31,7 +31,11 @@ router.put('/updateStatus', async (req, res) => {
     query: queries['User.updateStatus'],
     queryParamsOrder: order['User.updateStatus']
   };
-  await makeRequest(reqData);
+  const userInfo = await authorizate(res, req.query.token);
+  if (Object.prototype.hasOwnProperty.call(userInfo, 'user_id')) {
+    const expectedStatus = 1;
+    await checkedRequest(res, expectedStatus, userInfo.status, reqData);
+  }
 });
 
 router.get('/:user_id', async (req, res) => {
@@ -40,7 +44,11 @@ router.get('/:user_id', async (req, res) => {
     query: queries['User.getInfo'],
     queryParamsOrder: order['User.getInfo'],
   };
-  await makeRequest(reqData);
+  const userInfo = await authorizate(res, req.query.token);
+  if (Object.prototype.hasOwnProperty.call(userInfo, 'user_id')) {
+    const expectedStatus = 0;
+    await checkedRequest(res, expectedStatus, userInfo.status, reqData);
+  }
 });
 
 module.exports = router;
