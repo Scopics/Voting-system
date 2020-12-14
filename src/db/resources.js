@@ -42,12 +42,8 @@ async function makeRequest(reqData, authentification) {
 
 async function makeQuery(queryData) {
   const { queryParams, query } = queryData;
-  try {
-    const result = await pool.query(query, queryParams);
-    return result.rows;
-  } catch (error) {
-    console.log(error.message);
-  }
+  const result = await pool.query(query, queryParams);
+  return result.rows;
 }
 
 function tokenGenerator(email, password) {

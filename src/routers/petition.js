@@ -50,11 +50,11 @@ router.get('/:petition_id', async (req, res) => {
 });
 
 //vote for petition
-router.get('/:petition_id/vote', async (req, res) => {
+router.post('/:petition_id/vote', async (req, res) => {
   const reqData = {
     req, res,
-    query: queries['Petition_result.addVote'],
-    queryParamsOrder: order['Petition_result.addVote']
+    query: queries['Petition_results.addVote'],
+    queryParamsOrder: order['Petition_results.addVote']
   };
   const userInfo = await authorizate(res, req.query.token);
   if (Object.prototype.hasOwnProperty.call(userInfo, 'user_id')) {
