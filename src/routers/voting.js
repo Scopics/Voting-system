@@ -70,6 +70,7 @@ router.get('/:voting_id/resultDistrict', async (req, res) => {
   await makeRequest(reqData);
 });
 
+//vote
 router.post('/:voting_id/vote', async (req, res) => {
   const reqData = {
     req, res,

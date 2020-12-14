@@ -16,6 +16,7 @@ router.post('/register', async (req, res) => {
   await makeRequest(reqData, true);
 });
 
+//login
 router.post('/login', async (req, res) => {
   const reqData = {
     req, res,
@@ -25,6 +26,7 @@ router.post('/login', async (req, res) => {
   await makeRequest(reqData, true);
 });
 
+//update user status
 router.put('/updateStatus', async (req, res) => {
   const reqData = {
     req, res,
@@ -38,6 +40,7 @@ router.put('/updateStatus', async (req, res) => {
   }
 });
 
+//get user profile
 router.get('/:user_id', async (req, res) => {
   const reqData = {
     req, res,

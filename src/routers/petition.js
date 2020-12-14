@@ -19,6 +19,7 @@ router.post('/create', async (req, res) => {
   }
 });
 
+// get current
 router.get('/current', async (req, res) => {
   const reqData = {
     req, res,
@@ -81,6 +82,7 @@ router.get('/:petition_id/resultRegion', async (req, res) => {
   await makeRequest(reqData);
 });
 
+//get result for petition in region
 router.get('/:petition_id/resultDistrict', async (req, res) => {
   const reqData = {
     req, res,
