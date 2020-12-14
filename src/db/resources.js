@@ -11,7 +11,7 @@ function getQueryParamsArr(queryParams, queryParamsOrder) {
   return queryParamsArr;
 }
 
-async function makeRequest(reqData) {
+async function makeRequest(reqData, authentification) {
   const { req, res, query, queryParamsOrder } = reqData;
   const reqParams = req.params;
   const reqQuery = req.query;
@@ -25,8 +25,15 @@ async function makeRequest(reqData) {
   };
 
   try {
-    const result = await makeQuery(queryData);
-    res.json(result);
+    if (authentification) {
+      const { email, password } = queryParamsUnordered;
+      const token = tokenGenerator(email, password);
+      await makeQuery(queryData);
+      res.json({ token });
+    } else {
+      const result = await makeQuery(queryData);
+      res.json(result);
+    }
   } catch (error) {
     console.log(error.message);
     res.status(404).send('Error in query to db.');
