@@ -25,11 +25,7 @@ app.use('/falsification', falsificationRouter);
 
 
 app.get('/', (req, res) => {
-  pool.query('SELECT * FROM votings ORDER BY start_date DESC')
-    .then(query => {
-      res.json(query.rows);
-    })
-    .catch(err => console.log(err));
+  res.json('Seccessfully connected to voting system');
 });
 
 app.listen(PORT, () => {
