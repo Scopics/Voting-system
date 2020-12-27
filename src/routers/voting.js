@@ -55,7 +55,7 @@ router.get('/:voting_id/resultGeneral', async (req, res) => {
   const reqData = {
     req, res,
     query: queries['Voting.result'],
-    queryParamsOrder: order['Voting.resultDistrict'],
+    queryParamsOrder: order['Voting.result'],
   };
   await makeRequest(reqData);
 });
