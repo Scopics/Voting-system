@@ -11,6 +11,9 @@ function getQueryParamsArr(queryParams, queryParamsOrder) {
   return queryParamsArr;
 }
 
+const checkMissingArg = args => 
+  args.some(item => (typeof item == 'undefined' || (item && !item.length)))
+
 async function makeRequest(reqData, authentification) {
   const { req, res, query, queryParamsOrder } = reqData;
   const reqParams = req.params;
@@ -19,6 +22,13 @@ async function makeRequest(reqData, authentification) {
 
   const queryParamsOrdered =
     getQueryParamsArr(queryParamsUnordered, queryParamsOrder);
+
+  //check if fields are empty
+  if (checkMissingArg(queryParamsOrdered)) {
+    res.status(400).send('Empty fields are not allowed');
+    return;
+  }
+
   const queryData = {
     queryParams: queryParamsOrdered,
     query
