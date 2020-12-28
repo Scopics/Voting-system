@@ -43,6 +43,7 @@ async function makeRequest(reqData, authentification) {
       const { email, password } = queryParamsUnordered;
       const token = tokenGenerator(email, password);
       await makeQuery(queryData);
+      res.cookie('token', token, { httpOnly: true });
       res.json({ token });
     } else {
       const result = await makeQuery(queryData);
