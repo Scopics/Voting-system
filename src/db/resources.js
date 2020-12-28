@@ -12,7 +12,11 @@ function getQueryParamsArr(queryParams, queryParamsOrder) {
 }
 
 const checkMissingArg = args => 
-  args.some(item => (typeof item == 'undefined' || (item && !item.length)))
+  args.some(item => {
+    const condition1 = typeof item == 'undefined';
+    const condition2 = typeof item != 'undefined' && !item.length;
+    return (condition1 || condition2);
+  })
 
 async function makeRequest(reqData, authentification) {
   const { req, res, query, queryParamsOrder } = reqData;
