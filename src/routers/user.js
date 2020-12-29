@@ -41,20 +41,6 @@ router.put('/updateStatus', async (req, res) => {
   }
 });
 
-//get user profile
-router.get('/:user_id', async (req, res) => {
-  const reqData = {
-    req, res,
-    query: queries['User.getInfo'],
-    queryParamsOrder: order['User.getInfo'],
-  };
-  const userInfo = await authorizate(res, req.query.token);
-  if (Object.prototype.hasOwnProperty.call(userInfo, 'user_id')) {
-    const expectedStatus = 0;
-    await checkedRequest(res, expectedStatus, userInfo.status, reqData);
-  }
-});
-
 //get data via token
 router.get('/token', async (req, res) => {
   const token = req.query.token || '';
@@ -67,6 +53,20 @@ router.get('/token', async (req, res) => {
   };
   const result = await makeQuery(queryData);
   res.json(result[0]);
+});
+
+//get user profile
+router.get('/:user_id', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['User.getInfo'],
+    queryParamsOrder: order['User.getInfo'],
+  };
+  const userInfo = await authorizate(res, req.query.token);
+  if (Object.prototype.hasOwnProperty.call(userInfo, 'user_id')) {
+    const expectedStatus = 0;
+    await checkedRequest(res, expectedStatus, userInfo.status, reqData);
+  }
 });
 
 module.exports = router;
