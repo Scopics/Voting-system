@@ -1,8 +1,8 @@
 'use strict';
 
 const express = require('express');
-const { makeRequest, authorizate, checkedRequest, tokenDecoder, makeQuery } 
-  = require('../db/resources');
+const { makeRequest, authorizate, checkedRequest, tokenDecoder, makeQuery } =
+  require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
 const router = express.Router();
@@ -61,9 +61,10 @@ router.get('/token/:token', async (req, res) => {
   const decodedData = tokenDecoder(token || '');
   const { email } = decodedData;
   const queryData = {
-    query: 'SELECT user_id, name, surname, birthday_date, gender, district_id, email FROM users WHERE users.email = $1',
+    query: `SELECT user_id, name, surname, birthday_date, gender, district_id,
+     email FROM users WHERE users.email = $1`,
     queryParams: [email]
-  }
+  };
   const result = await makeQuery(queryData);
   res.json(result[0]);
 });
