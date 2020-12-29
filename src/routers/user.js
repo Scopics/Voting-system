@@ -56,8 +56,8 @@ router.get('/:user_id', async (req, res) => {
 });
 
 //get data via token
-router.get('/token', async (req, res) => {
-  const token = req.query.token || '';
+router.get('/token/:token', async (req, res) => {
+  const token = req.params.token || '';
   const decodedData = tokenDecoder(token);
   const { email } = decodedData;
   const queryData = {
