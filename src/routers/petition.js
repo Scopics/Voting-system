@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const { makeRequest, authorizate } = require('../db/resources');
+const { makeRequest, authorizate, processLimit } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
 const router = express.Router();
@@ -21,6 +21,7 @@ router.post('/create', async (req, res) => {
 
 // get current
 router.get('/current', async (req, res) => {
+  processLimit(req);
   const reqData = {
     req, res,
     query: queries['Petition.getCurrent'],
@@ -31,6 +32,7 @@ router.get('/current', async (req, res) => {
 
 // get all
 router.get('/all', async (req, res) => {
+  processLimit(req);
   const reqData = {
     req, res,
     query: queries['Petition.getAll'],

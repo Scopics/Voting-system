@@ -3,6 +3,16 @@ const pool = require('./db');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+function processLimit(req) {
+  let { limit, offset } = req.query;
+  const maxLimit = 10, defaultOffset = 0;
+  offset = offset || defaultOffset;
+  if (limit) limit = Math.min(limit, maxLimit);
+  else limit = maxLimit;
+  req.query.limit = limit;
+  req.query.offset = offset;
+}
+
 function getQueryParamsArr(queryParams, queryParamsOrder) {
   if (!queryParamsOrder)
     return Object.values(queryParams);
@@ -14,7 +24,7 @@ function getQueryParamsArr(queryParams, queryParamsOrder) {
 const checkMissingArg = args => 
   args.some(item => {
     const condition1 = typeof item == 'undefined';
-    const condition2 = typeof item != 'undefined' && !item.length;
+    const condition2 = typeof item != 'undefined' && !`${item}`.length;
     return (condition1 || condition2);
   })
 
@@ -103,5 +113,6 @@ module.exports = {
   tokenGenerator,
   tokenDecoder,
   checkedRequest,
-  authorizate
+  authorizate,
+  processLimit
 };

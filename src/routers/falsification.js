@@ -1,12 +1,10 @@
 'use strict';
 
 const express = require('express');
-const { makeRequest, authorizate } = require('../db/resources');
+const { makeRequest, authorizate, processLimit } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
 const router = express.Router();
-
-
 
 // create
 router.post('/create', async (req, res) => {
@@ -23,6 +21,7 @@ router.post('/create', async (req, res) => {
 
 // get all falsifications
 router.get('/all', async (req, res) => {
+  processLimit(req);
   const reqData = {
     req, res,
     query: queries['Falsification.getAll'],
