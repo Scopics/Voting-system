@@ -48,7 +48,7 @@ router.get('/token', async (req, res) => {
   const { email } = decodedData;
   const queryData = {
     query: `SELECT user_id, name, surname, birthday_date, gender, district_id,
-     email FROM users WHERE users.email = $1`,
+     email, status FROM users WHERE users.email = $1`,
     queryParams: [email]
   };
   const result = await makeQuery(queryData);
