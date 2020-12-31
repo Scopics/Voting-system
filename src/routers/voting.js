@@ -23,10 +23,15 @@ router.post('/create', async (req, res) => {
 // get all votings
 router.get('/all', async (req, res) => {
   processLimit(req);
+  const searchText = req.query.searchText;
+  const query = searchText ? 
+    queries['Voting.getAllBySearch'] : queries['Voting.getAll']
+  const queryParamsOrder = searchText ? 
+    order['Voting.getAllBySearch'] : order['Voting.getAll']
   const reqData = {
     req, res,
-    query: queries['Voting.getAll'],
-    queryParamsOrder: order['Voting.getAll'],
+    query,
+    queryParamsOrder,
   };
   await makeRequest(reqData);
 });
@@ -34,10 +39,15 @@ router.get('/all', async (req, res) => {
 // get current votings
 router.get('/current', async (req, res) => {
   processLimit(req);
+  const searchText = req.query.searchText;
+  const query = searchText ? 
+    queries['Voting.getCurrentBySearch'] : queries['Voting.getCurrent']
+  const queryParamsOrder = searchText ? 
+    order['Voting.getCurrentBySearch'] : order['Voting.getCurrent']
   const reqData = {
     req, res,
-    query: queries['Voting.getCurrent'],
-    queryParamsOrder: order['Voting.getCurrent'],
+    query,
+    queryParamsOrder,
   };
   await makeRequest(reqData);
 });

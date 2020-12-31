@@ -22,10 +22,15 @@ router.post('/create', async (req, res) => {
 // get current
 router.get('/current', async (req, res) => {
   processLimit(req);
+  const searchText = req.query.searchText;
+  const query = searchText ? 
+    queries['Petition.getCurrentBySearch'] : queries['Petition.getCurrent']
+  const queryParamsOrder = searchText ? 
+    order['Petition.getCurrentBySearch'] : order['Petition.getCurrent']
   const reqData = {
     req, res,
-    query: queries['Petition.getCurrent'],
-    queryParamsOrder: order['Petition.getCurrent'],
+    query,
+    queryParamsOrder,
   };
   await makeRequest(reqData);
 });
@@ -33,10 +38,15 @@ router.get('/current', async (req, res) => {
 // get all
 router.get('/all', async (req, res) => {
   processLimit(req);
+  const searchText = req.query.searchText;
+  const query = searchText ? 
+    queries['Petition.getAllBySearch'] : queries['Petition.getAll']
+  const queryParamsOrder = searchText ? 
+    order['Petition.getAllBySearch'] : order['Petition.getAll']
   const reqData = {
     req, res,
-    query: queries['Petition.getAll'],
-    queryParamsOrder: order['Petition.getAll']
+    query,
+    queryParamsOrder,
   };
   await makeRequest(reqData);
 });

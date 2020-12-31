@@ -22,10 +22,15 @@ router.post('/create', async (req, res) => {
 // get all falsifications
 router.get('/all', async (req, res) => {
   processLimit(req);
+  const searchText = req.query.searchText;
+  const query = searchText ? 
+    queries['Falsification.getAllBySearch'] : queries['Falsification.getAll']
+  const queryParamsOrder = searchText ? 
+    order['Falsification.getAllBySearch'] : order['Falsification.getAll']
   const reqData = {
     req, res,
-    query: queries['Falsification.getAll'],
-    queryParamsOrder: order['Falsification.getAll'],
+    query,
+    queryParamsOrder,
   };
   await makeRequest(reqData);
 });
