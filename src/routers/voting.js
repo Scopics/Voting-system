@@ -6,7 +6,8 @@ const {
   authorizate, 
   checkedRequest, 
   processLimit, 
-  tokenDecoder 
+  tokenDecoder,
+  makeQuery
 } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
