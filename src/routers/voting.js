@@ -1,7 +1,13 @@
 'use strict';
 
 const express = require('express');
-const { makeRequest, authorizate, checkedRequest, processLimit } = require('../db/resources');
+const { 
+  makeRequest, 
+  authorizate, 
+  checkedRequest, 
+  processLimit, 
+  tokenDecoder 
+} = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
 const router = express.Router();
@@ -82,8 +88,44 @@ router.get('/:voting_id/resultDistrict', async (req, res) => {
   await makeRequest(reqData);
 });
 
+//get vote
+router.get('/:voting_id/voteResult', async (req, res) => {
+  const token = req.query.token || '';
+  const decodedData = tokenDecoder(token);
+  const { email } = decodedData;
+  const queryData = {
+    query: `SELECT user_id FROM users WHERE users.email = $1`,
+    queryParams: [email]
+  };
+  const result = await makeQuery(queryData);
+  const user = result[0];
+  if (req.query.user_id !== user.user_id) {
+    res.status(401).send('You can not get this info');
+    return;
+  }
+  const reqData = {
+    req, res,
+    query: queries['Voting_results.getVote'],
+    queryParamsOrder: order['Voting_results.getVote']
+  };
+  await makeRequest(reqData);
+});
+
 //vote
 router.post('/:voting_id/vote', async (req, res) => {
+  const token = req.query.token || '';
+  const decodedData = tokenDecoder(token);
+  const { email } = decodedData;
+  const queryData = {
+    query: `SELECT user_id FROM users WHERE users.email = $1`,
+    queryParams: [email]
+  };
+  const result = await makeQuery(queryData);
+  const user = result[0];
+  if (req.query.user_id !== user.user_id) {
+    res.status(401).send('You can not get this info');
+    return;
+  }
   const reqData = {
     req, res,
     query: queries['Voting_results.addVote'],
