@@ -100,7 +100,7 @@ router.get('/:voting_id/voteResult', async (req, res) => {
   };
   const result = await makeQuery(queryData);
   const user = result[0];
-  if (req.query.user_id !== user.user_id) {
+  if (req.query.user_id != user.user_id) {
     res.status(401).send('You can not get this info');
     return;
   }
@@ -123,7 +123,8 @@ router.post('/:voting_id/vote', async (req, res) => {
   };
   const result = await makeQuery(queryData);
   const user = result[0];
-  if (req.query.user_id !== user.user_id) {
+  
+  if (req.query.user_id != user.user_id) {
     res.status(401).send('You can not get this info');
     return;
   }
