@@ -22,7 +22,7 @@
     "Voting.getAllBySearch" : "SELECT * FROM votings WHERE name LIKE '%' || $3 || '%' ORDER BY start_date DESC limit $1 offset $2;",
     "Voting.getCurrent" : "SELECT * FROM votings WHERE (start_date < NOW() AND NOW() < end_date) limit $1 offset $2;",
     "Voting.getCurrentBySearch" : "SELECT * FROM votings WHERE (start_date < NOW() AND NOW() < end_date AND name LIKE '%' || $3 || '%') limit $1 offset $2;",
-    "Voting.result" : "SELECT variants.name, COUNT(voting_results.user_id) AS votes FROM voting_results INNER JOIN variants ON voting_results.variant_id = variants.variant_id WHERE voting_results.voting_id = $1 GROUP BY variants.name ORDER BY votes DESC;",
+    "Voting.result" : "SELECT voting_results.variant_id, COUNT(voting_results.user_id) AS votes FROM voting_results INNER JOIN variants ON voting_results.variant_id = variants.variant_id WHERE voting_results.voting_id = $1 GROUP BY variants.name ORDER BY votes DESC;",
     "Voting.resultDistrict" : "SELECT var.name, COUNT(vr.variant_id) AS num_voters FROM voting_results vr LEFT JOIN users u ON u.user_id=vr.user_id LEFT JOIN variants var ON var.variant_id = vr.variant_id WHERE vr.voting_id = $1 AND u.district_id = $2 GROUP BY var.name ORDER by num_voters DESC;",
     "Petition_results.addVote" : "INSERT INTO petition_results VALUES ($1, $2);",
     "Voting_results.addVote" : "INSERT INTO voting_results VALUES ($1, $2, $3);",
