@@ -3,7 +3,6 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors')
-const pool = require('./db/db');
 const PORT = process.env.PORT || 5000;
 
 const app = express();
@@ -12,6 +11,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
+
+const dataRouter = require('./routers/data');
+app.use('/', dataRouter);
 
 const votingRouter = require('./routers/voting.js');
 app.use('/voting', votingRouter);
