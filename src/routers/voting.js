@@ -89,6 +89,17 @@ router.get('/:voting_id/resultDistrict', async (req, res) => {
   await makeRequest(reqData);
 });
 
+// get result by all districts
+router.get('/:voting_id/resultAllDistricts', async (req, res) => {
+  const result = await makeQuery({
+    query: queries['Voting.resultAllDistricts'],
+    queryParams: []
+  });
+  const resultByDistrict = [];
+  result.forEach(district => resultByDistrict[district.district_id] ? resultByDistrict[district.district_id].push(district) : resultByDistrict[district.district_id] = [district]);
+  res.json(resultByDistrict);
+});
+
 //get vote
 router.get('/:voting_id/voteResult', async (req, res) => {
   const token = req.query.token || '';
