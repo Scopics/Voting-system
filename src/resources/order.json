@@ -24,6 +24,7 @@
     "Voting.getCurrentBySearch" : ["limit", "offset", "searchText"],
     "Voting.result" : ["voting_id"],
     "Voting.resultDistrict" : ["voting_id", "district_id"],
+    "Voting.resultAllDistricts" : ["voting_id"],
     "Petition_results.addVote" : ["user_id", "petition_id"],
     "Voting_results.addVote" : ["voting_id", "variant_id", "user_id"],
     "Voting_results.getVote" : ["user_id", "voting_id"],

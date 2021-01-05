@@ -93,7 +93,7 @@ router.get('/:voting_id/resultDistrict', async (req, res) => {
 router.get('/:voting_id/resultAllDistricts', async (req, res) => {
   const result = await makeQuery({
     query: queries['Voting.resultAllDistricts'],
-    queryParams: []
+    queryParams: [req.params.voting_id]
   });
   const resultByDistrict = [];
   result.forEach(district => resultByDistrict[district.district_id] ? 
