@@ -96,7 +96,9 @@ router.get('/:voting_id/resultAllDistricts', async (req, res) => {
     queryParams: []
   });
   const resultByDistrict = [];
-  result.forEach(district => resultByDistrict[district.district_id] ? resultByDistrict[district.district_id].push(district) : resultByDistrict[district.district_id] = [district]);
+  result.forEach(district => resultByDistrict[district.district_id] ? 
+    resultByDistrict[district.district_id].push(district) : 
+    resultByDistrict[district.district_id] = [district]);
   res.json(resultByDistrict);
 });
 
