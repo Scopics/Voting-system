@@ -7,7 +7,8 @@ const {
   checkedRequest, 
   processLimit, 
   tokenDecoder,
-  makeQuery
+  makeQuery,
+  makeRequestWithTotal
 } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
@@ -30,17 +31,18 @@ router.post('/create', async (req, res) => {
 // get all votings
 router.get('/all', async (req, res) => {
   processLimit(req);
-  const searchText = req.query.searchText;
+  const { searchText } = req.query;
   const query = searchText ? 
-    queries['Voting.getAllBySearch'] : queries['Voting.getAll']
-  const queryParamsOrder = searchText ? 
-    order['Voting.getAllBySearch'] : order['Voting.getAll']
+    queries['Voting.getAllBySearch'] : 
+    queries['Voting.getAll'];
+  const totalQuery = searchText ? 
+    queries['Voting.getAllBySearchSize'] : 
+    queries['Voting.getAllSize'];
   const reqData = {
     req, res,
-    query,
-    queryParamsOrder,
+    query, totalQuery
   };
-  await makeRequest(reqData);
+  makeRequestWithTotal(reqData)
 });
 
 // get current votings
@@ -48,15 +50,16 @@ router.get('/current', async (req, res) => {
   processLimit(req);
   const searchText = req.query.searchText;
   const query = searchText ? 
-    queries['Voting.getCurrentBySearch'] : queries['Voting.getCurrent']
-  const queryParamsOrder = searchText ? 
-    order['Voting.getCurrentBySearch'] : order['Voting.getCurrent']
+    queries['Voting.getCurrentBySearch'] : 
+    queries['Voting.getCurrent']
+  const totalQuery = searchText ? 
+    queries['Voting.getCurrentBySearchSize'] : 
+    queries['Voting.getCurrentSize'];
   const reqData = {
     req, res,
-    query,
-    queryParamsOrder,
+    query, totalQuery
   };
-  await makeRequest(reqData);
+  makeRequestWithTotal(reqData)
 });
 
 // get variants for specific voting

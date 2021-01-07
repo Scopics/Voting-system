@@ -1,7 +1,12 @@
 'use strict';
 
 const express = require('express');
-const { makeRequest, authorizate, processLimit } = require('../db/resources');
+const { 
+  makeRequest, 
+  authorizate, 
+  processLimit, 
+  makeRequestWithTotal 
+} = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
 const router = express.Router();
@@ -22,17 +27,18 @@ router.post('/create', async (req, res) => {
 // get all falsifications
 router.get('/all', async (req, res) => {
   processLimit(req);
-  const searchText = req.query.searchText;
+  const { searchText } = req.query;
   const query = searchText ? 
-    queries['Falsification.getAllBySearch'] : queries['Falsification.getAll']
-  const queryParamsOrder = searchText ? 
-    order['Falsification.getAllBySearch'] : order['Falsification.getAll']
+    queries['Falsification.getAllBySearch'] : 
+    queries['Falsification.getAll'];
+  const totalQuery = searchText ? 
+    queries['Falsification.getAllBySearchSize'] : 
+    queries['Falsification.getAllSize'];
   const reqData = {
     req, res,
-    query,
-    queryParamsOrder,
+    query, totalQuery
   };
-  await makeRequest(reqData);
+  makeRequestWithTotal(reqData)
 });
 
 // get info about specific falsification

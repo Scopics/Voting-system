@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const { makeRequest, authorizate, processLimit } = require('../db/resources');
+const { makeRequest, authorizate, processLimit, makeRequestWithTotal } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
 const router = express.Router();
@@ -24,31 +24,33 @@ router.get('/current', async (req, res) => {
   processLimit(req);
   const searchText = req.query.searchText;
   const query = searchText ? 
-    queries['Petition.getCurrentBySearch'] : queries['Petition.getCurrent']
-  const queryParamsOrder = searchText ? 
-    order['Petition.getCurrentBySearch'] : order['Petition.getCurrent']
+    queries['Petition.getCurrentBySearch'] : 
+    queries['Petition.getCurrent']
+  const totalQuery = searchText ? 
+    queries['Petition.getCurrentBySearchSize'] : 
+    queries['Petition.getCurrentSize'];
   const reqData = {
     req, res,
-    query,
-    queryParamsOrder,
+    query, totalQuery
   };
-  await makeRequest(reqData);
+  makeRequestWithTotal(reqData)
 });
 
 // get all
 router.get('/all', async (req, res) => {
   processLimit(req);
-  const searchText = req.query.searchText;
+  const { searchText } = req.query;
   const query = searchText ? 
-    queries['Petition.getAllBySearch'] : queries['Petition.getAll']
-  const queryParamsOrder = searchText ? 
-    order['Petition.getAllBySearch'] : order['Petition.getAll']
+    queries['Petition.getAllBySearch'] : 
+    queries['Petition.getAll'];
+  const totalQuery = searchText ? 
+    queries['Petition.getAllBySearchSize'] : 
+    queries['Petition.getAllSize'];
   const reqData = {
     req, res,
-    query,
-    queryParamsOrder,
+    query, totalQuery
   };
-  await makeRequest(reqData);
+  makeRequestWithTotal(reqData)
 });
 
 //get info for petition

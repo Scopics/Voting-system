@@ -14,7 +14,7 @@ router.post('/register', async (req, res) => {
     query: queries['User.register'],
     queryParamsOrder: order['User.register'],
   };
-  await makeRequest(reqData, true);
+  await makeRequest(reqData, { authentification: true });
 });
 
 //login
@@ -24,7 +24,7 @@ router.post('/login', async (req, res) => {
     query: queries['User.login'],
     queryParamsOrder: order['User.login'],
   };
-  await makeRequest(reqData, true);
+  await makeRequest(reqData, { authentification: true });
 });
 
 //update user status

@@ -28,8 +28,9 @@ const checkMissingArg = args =>
     return (condition1 || condition2);
   })
 
-async function makeRequest(reqData, authentification) {
+async function makeRequest(reqData, config = {}) {
   const { req, res, query, queryParamsOrder } = reqData;
+  const { authentification } = config;
   const reqParams = req.params;
   const reqQuery = req.query;
   const queryParamsUnordered = { ...reqQuery, ...reqParams };
@@ -63,6 +64,31 @@ async function makeRequest(reqData, authentification) {
     console.log(error.message);
     res.status(404).send('Error in query to db.');
   }
+}
+
+async function makeRequestWithTotal(reqData) {
+  const {
+    req, res, query, totalQuery
+  } = reqData;
+  const { limit, offset, searchText } = req.query;
+  const queryParams = searchText ? 
+    [limit || 10, offset || 0, searchText] : 
+    [limit || 10, offset || 0];
+  const queryData = {
+    queryParams, query
+  }
+  const result = await makeQuery(queryData);
+
+  const reqTotalData = {
+    queryParams: [],
+    query: totalQuery
+  }
+  const total = await makeQuery(reqTotalData);
+
+  res.json({ 
+    result, 
+    count: total[0].count 
+  })
 }
 
 async function makeQuery(queryData) {
@@ -114,5 +140,6 @@ module.exports = {
   tokenDecoder,
   checkedRequest,
   authorizate,
-  processLimit
+  processLimit,
+  makeRequestWithTotal
 };
