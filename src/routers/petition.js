@@ -1,7 +1,13 @@
 'use strict';
 
 const express = require('express');
-const { makeRequest, authorizate, processLimit, makeRequestWithTotal } = require('../db/resources');
+const { 
+  makeRequest, 
+  authorizate, 
+  processLimit, 
+  makeRequestWithTotal, 
+  makeQuery 
+} = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
 const router = express.Router();
@@ -65,6 +71,7 @@ router.get('/:petition_id', async (req, res) => {
 
 //get vote
 router.get('/:petition_id/voteResult', async (req, res) => {
+  console.log({ ...req.query, ...req.params });
   const reqData = {
     req, res,
     query: queries['Petition_results.getVote'],
@@ -104,6 +111,17 @@ router.get('/:petition_id/resultRegion', async (req, res) => {
     queryParamsOrder: order['Petition.resultRegion'],
   };
   await makeRequest(reqData);
+});
+
+// get result by all districts
+router.get('/:petition_id/resultAllDistricts', async (req, res) => {
+  const result = await makeQuery({
+    query: queries['Petition.resultAllDistricts'],
+    queryParams: [req.params.petition_id]
+  });
+  const resultByDistrict = [];
+  result.forEach(district => resultByDistrict[district.district_id] = district);
+  res.json(resultByDistrict);
 });
 
 //get result for petition in region
