@@ -120,7 +120,7 @@ router.get('/:petition_id/resultAllDistricts', async (req, res) => {
     queryParams: [req.params.petition_id]
   });
   const resultByDistrict = [];
-  result.forEach(district => resultByDistrict[district.district_id] = district);
+  result.forEach(district => resultByDistrict[district.district_id] = [district]);
   res.json(resultByDistrict);
 });
 
