@@ -36,6 +36,7 @@
     "Voting.resultDistrict" : "SELECT var.variant_id, var.name, COUNT(vr.variant_id) AS votes FROM voting_results vr LEFT JOIN users u ON u.user_id=vr.user_id LEFT JOIN variants var ON var.variant_id = vr.variant_id WHERE vr.voting_id = $1 AND u.district_id = $2 GROUP BY var.variant_id, var.name ORDER by votes DESC;",
     "Voting.resultAllDistricts" : "SELECT u.district_id, var.variant_id, var.name, COUNT(vr.variant_id) AS votes FROM voting_results vr LEFT JOIN users u ON u.user_id=vr.user_id LEFT JOIN variants var ON var.variant_id = vr.variant_id WHERE vr.voting_id = $1 GROUP BY u.district_id, var.variant_id, var.name;",
     "Petition_results.addVote" : "INSERT INTO petition_results VALUES ($1, $2);",
+    "Petition_results.getVote" : "SELECT * FROM petition_results WHERE user_id = $1 AND petition_id = $2;",
     "Voting_results.addVote" : "INSERT INTO voting_results VALUES ($1, $2, $3);",
     "Voting_results.getVote" : "SELECT * FROM voting_results WHERE user_id = $1 AND voting_id = $2;",
     "GetDistricts": "SELECT * FROM districts;",

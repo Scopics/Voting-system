@@ -63,6 +63,16 @@ router.get('/:petition_id', async (req, res) => {
   await makeRequest(reqData);
 });
 
+//get vote
+router.get('/:petition_id/voteResult', async (req, res) => {
+  const reqData = {
+    req, res,
+    query: queries['Petition_results.getVote'],
+    queryParamsOrder: order['Petition_results.getVote']
+  };
+  await makeRequest(reqData);
+});
+
 //vote for petition
 router.post('/:petition_id/vote', async (req, res) => {
   const reqData = {
