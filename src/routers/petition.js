@@ -71,7 +71,6 @@ router.get('/:petition_id', async (req, res) => {
 
 //get vote
 router.get('/:petition_id/voteResult', async (req, res) => {
-  console.log({ ...req.query, ...req.params });
   const reqData = {
     req, res,
     query: queries['Petition_results.getVote'],

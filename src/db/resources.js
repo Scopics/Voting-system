@@ -78,9 +78,11 @@ async function makeRequestWithTotal(reqData) {
     queryParams, query
   }
   const result = await makeQuery(queryData);
+  const totalQueryParams = searchText ? 
+    [searchText] : [];
 
   const reqTotalData = {
-    queryParams: [],
+    queryParams: totalQueryParams,
     query: totalQuery
   }
   const total = await makeQuery(reqTotalData);
