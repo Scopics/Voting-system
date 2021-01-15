@@ -6,7 +6,8 @@ const {
   authorizate, 
   processLimit, 
   makeRequestWithTotal, 
-  makeQuery 
+  makeQuery,
+  processDate
 } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
@@ -14,6 +15,7 @@ const router = express.Router();
 
 // create
 router.post('/create', async (req, res) => {
+  processDate(req);
   const reqData = {
     req, res,
     query: queries['Petition.create'],

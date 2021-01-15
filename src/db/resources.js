@@ -3,6 +3,19 @@ const pool = require('./db');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+const monthesForPetition = 3;
+
+function processDate(req) {
+  const start_date = new Date();
+  const end_date = new Date(start_date);
+  end_date.setMonth(start_date.getMonth() + monthesForPetition);
+  req.query = {
+    ...req.query,
+    start_date,
+    end_date
+  }
+}
+
 function processLimit(req) {
   let { limit, offset } = req.query;
   const maxLimit = 10, defaultOffset = 0;
@@ -143,5 +156,6 @@ module.exports = {
   checkedRequest,
   authorizate,
   processLimit,
-  makeRequestWithTotal
+  makeRequestWithTotal,
+  processDate
 };
