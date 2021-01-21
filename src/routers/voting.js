@@ -18,7 +18,10 @@ const router = express.Router();
 router.post('/create', async (req, res) => {
   try {
     // create voting
-    const { name, description, start_date, end_date  } = req.query;
+    const { name, description  } = req.query;
+    const start_date = new Date(req.query.start_date);
+    const end_date = new Date(req.query.end_date);
+
     const queryParamsCreate = [name, description, start_date, end_date];
     const queryCreate = queries["Voting.create"];
     const queryDataCreate = { 
