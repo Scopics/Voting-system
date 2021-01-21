@@ -3,11 +3,11 @@ const pool = require('./db');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const monthesForPetition = 3;
-
-function processDate(req) {
+function processDatePetition(req) {
   const start_date = new Date();
   const end_date = new Date(start_date);
+  
+  const monthesForPetition = 3;
   end_date.setMonth(start_date.getMonth() + monthesForPetition);
   req.query = {
     ...req.query,
@@ -157,5 +157,5 @@ module.exports = {
   authorizate,
   processLimit,
   makeRequestWithTotal,
-  processDate
+  processDatePetition
 };

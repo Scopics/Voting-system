@@ -9,18 +9,15 @@ const {
   tokenDecoder,
   makeQuery,
   makeRequestWithTotal,
-  processDate
 } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
-const { off } = require('../db/db');
 const router = express.Router();
 
 //create voting
 router.post('/create', async (req, res) => {
   try {
     // create voting
-    processDate(req);
     const { name, description, start_date, end_date  } = req.query;
     const queryParamsCreate = [name, description, start_date, end_date];
     const queryCreate = queries["Voting.create"];
