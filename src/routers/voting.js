@@ -8,23 +8,57 @@ const {
   processLimit, 
   tokenDecoder,
   makeQuery,
-  makeRequestWithTotal
+  makeRequestWithTotal,
+  processDate
 } = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
+const { off } = require('../db/db');
 const router = express.Router();
 
 //create voting
 router.post('/create', async (req, res) => {
-  const reqData = {
-    req, res,
-    query: queries['Voting.create'],
-    queryParamsOrder: order['Voting.create']
-  };
-  const userInfo = await authorizate(res, req.query.token);
-  if (Object.prototype.hasOwnProperty.call(userInfo, 'user_id')) {
-    const expectedStatus = 1;
-    await checkedRequest(res, expectedStatus, userInfo.status, reqData);
+  try {
+    // create voting
+    processDate(req);
+    const { name, description, start_date, end_date  } = req.query;
+    const queryParamsCreate = [name, description, start_date, end_date];
+    const queryCreate = queries["Voting.create"];
+    const queryDataCreate = { 
+      queryParams: queryParamsCreate, 
+      query: queryCreate 
+    };
+    
+    await makeQuery(queryDataCreate);
+
+    // get last voting id
+    const offset = 0;
+    const limit = 1;
+    const queryParamsLast = [limit, offset];
+    const queryLast = queries["Voting.getAll"];
+    const queryDataLast = { 
+      queryParams: queryParamsLast, 
+      query: queryLast 
+    };
+    const lastVotingId = (await makeQuery(queryDataLast))[0].voting_id;
+
+    // add variants
+    const variants = JSON.parse(req.query.variants);
+  
+    const queryAddVar = queries["Variant.add"];
+    for (const variant of variants) {
+      const queryParamsAddVar = [lastVotingId, variant.name, variant.description];
+
+      const queryDataAddVar = { 
+        queryParams: queryParamsAddVar,
+        query: queryAddVar
+      };
+      await makeQuery(queryDataAddVar);
+    }
+    res.json([]);    
+  } catch (error) {
+    console.log(error.message);
+    res.status(404).send('Error in query to db.');
   }
 });
 
