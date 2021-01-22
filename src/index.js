@@ -12,7 +12,8 @@ app.use(express.json());
 app.use(helmet());
 // app.use(cors());
 app.use(cors({
-  origin: 'http://localhost:3000/'
+  origin: '*',
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 }));
 
 const dataRouter = require('./routers/data');
