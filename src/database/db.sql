@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS Public.Variants (
   voting_id int NOT NULL,
   name varchar NOT NULL,
   description text NOT NULL,
+  imagePath varchar NOT NULL,
   PRIMARY KEY (variant_id),
   CONSTRAINT Variants_voting_id_foreign FOREIGN KEY (voting_id) REFERENCES Public.Votings (voting_id)
 );
