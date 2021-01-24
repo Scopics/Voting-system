@@ -1,8 +1,14 @@
 'use strict';
 
 const express = require('express');
-const { makeRequest, authorizate, checkedRequest, tokenDecoder, makeQuery } =
-  require('../db/resources');
+const { 
+  makeRequest, 
+  authorizate, 
+  checkedRequest, 
+  tokenDecoder, 
+  makeQuery, 
+  tokenGenerator 
+} = require('../db/resources');
 const queries = require('../resources/queries.json');
 const order = require('../resources/order.json');
 const router = express.Router();
@@ -19,12 +25,19 @@ router.post('/register', async (req, res) => {
 
 //login
 router.post('/login', async (req, res) => {
-  const reqData = {
-    req, res,
-    query: queries['User.login'],
-    queryParamsOrder: order['User.login'],
-  };
-  await makeRequest(reqData, { authentification: true });
+  const { email, password } = req.query;
+  const query = queries['User.login'];
+  const queryParams = [email, password];
+  const queryData = { query, queryParams };
+  const result = await makeQuery(queryData);
+
+  if (result.length === 0) {
+    res.status(401).send('Немає користувачів з таким логіном і паролем');
+  } else {
+    const token = tokenGenerator(email, password);
+    res.cookie('token', token, { httpOnly: true });
+    res.json({ token });
+  }
 });
 
 //update user status
