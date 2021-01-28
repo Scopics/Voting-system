@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const fs = require('fs');
 const { 
   makeRequest, 
   authorizate, 
@@ -43,11 +44,23 @@ router.post('/create', async (req, res) => {
     const lastVotingId = (await makeQuery(queryDataLast))[0].voting_id;
 
     // add variants
-    const variants = JSON.parse(req.query.variants);
+    const variants = req.body.variants;
   
     const queryAddVar = queries["Variant.add"];
     for (const variant of variants) {
-      const queryParamsAddVar = [lastVotingId, variant.name, variant.description];
+      const { name, description } = variant;
+      const base64 = String(variant.base64);
+      const fileName = `${Math.floor(Math.random() * base64.length)}.jpg`;
+      const base64Image = base64.split(';base64,').pop();
+
+      const directory = __dirname + '/../images/';
+      fs.writeFile(directory + fileName, base64Image, { encoding: 'base64' }, (err) => {
+        if (err) {
+          res.status(404).send('Error in query to db.');
+          console.log(err.message);
+        }
+      });
+      const queryParamsAddVar = [lastVotingId, name, description, fileName];
 
       const queryDataAddVar = { 
         queryParams: queryParamsAddVar,
