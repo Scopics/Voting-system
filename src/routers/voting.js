@@ -111,12 +111,26 @@ router.get('/current', async (req, res) => {
 
 // get variants for specific voting
 router.get('/:voting_id/variants', async (req, res) => {
-  const reqData = {
-    req, res,
-    query: queries['Voting.getVariants'],
-    queryParamsOrder: order['Voting.getVariants'],
-  };
-  await makeRequest(reqData);
+  const query = queries['Voting.getVariants'];
+  const queryParams = [req.params.voting_id];
+  const queryData = { query, queryParams };
+  const variants = await makeQuery(queryData);
+
+  const directory = __dirname + '/../images/';
+
+  for (const variant of variants) {
+    const fileName = variant.imagename;
+    try {   
+      const image = fs.readFileSync(directory + fileName, { encoding: 'base64' });
+      variant.image = image;
+    } catch (error) {
+      res.status(404).send('Error in query to db.');
+      console.log(err.message);
+      return;
+    }
+  }
+
+  res.json(variants);
 });
 
 // get result general
