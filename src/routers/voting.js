@@ -125,7 +125,7 @@ router.get('/:voting_id/variants', async (req, res) => {
       variant.image = image;
     } catch (error) {
       res.status(404).send('Error in query to db.');
-      console.log(err.message);
+      console.log(error.message);
       return;
     }
   }
