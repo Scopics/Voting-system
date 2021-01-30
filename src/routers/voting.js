@@ -49,18 +49,9 @@ router.post('/create', async (req, res) => {
     const queryAddVar = queries["Variant.add"];
     for (const variant of variants) {
       const { name, description } = variant;
-      const base64 = String(variant.base64);
-      const fileName = `${Math.floor(Math.random() * base64.length)}.jpg`;
-      const base64Image = base64.split(';base64,').pop();
+      const base64Image = String(variant.base64);
 
-      const directory = __dirname + '/../images/';
-      fs.writeFile(directory + fileName, base64Image, { encoding: 'base64' }, (err) => {
-        if (err) {
-          res.status(404).send('Error in query to db.');
-          console.log(err.message);
-        }
-      });
-      const queryParamsAddVar = [lastVotingId, name, description, fileName];
+      const queryParamsAddVar = [lastVotingId, name, description, base64Image];
 
       const queryDataAddVar = { 
         queryParams: queryParamsAddVar,
@@ -111,26 +102,12 @@ router.get('/current', async (req, res) => {
 
 // get variants for specific voting
 router.get('/:voting_id/variants', async (req, res) => {
-  const query = queries['Voting.getVariants'];
-  const queryParams = [req.params.voting_id];
-  const queryData = { query, queryParams };
-  const variants = await makeQuery(queryData);
-
-  const directory = __dirname + '/../images/';
-
-  for (const variant of variants) {
-    const fileName = variant.imagename;
-    try {   
-      const image = fs.readFileSync(directory + fileName, { encoding: 'base64' });
-      variant.image = image;
-    } catch (error) {
-      res.status(404).send('Error in query to db.');
-      console.log(error.message);
-      return;
-    }
-  }
-
-  res.json(variants);
+  const reqData = {
+    req, res,
+    query: queries['Voting.getVariants'],
+    queryParamsOrder: order['Voting.getVariants'],
+  };
+  await makeRequest(reqData);
 });
 
 // get result general
